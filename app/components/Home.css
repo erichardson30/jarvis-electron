@@ -1,0 +1,21 @@
+.container {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.container h2 {
+  font-size: 5rem;
+}
+
+.container a {
+  font-size: 1.4rem;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: 75%;
+}
+.title {
+  margin-top:20px;
+}
