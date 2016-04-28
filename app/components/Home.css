@@ -1,5 +1,11 @@
+body {
+  background-image: url("../jarvis-bkrd.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 .container {
   text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container h2 {
@@ -12,11 +18,14 @@
 
 .logo {
   display: block;
-  width: 50%;
+  width: 40%;
 }
 .title {
   margin-top:100px;
 }
 .button {
-  size: 24px;
+  position: fixed !important;
+  bottom: 0px;
+  left: 0px;
+  height: 75px !important;
 }

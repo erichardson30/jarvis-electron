@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import styles from './Home.css';
 import io from 'socket.io-client';
+import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 
-let socket = io(`http://localhost:8000`)
+let socket = io(`http://10.104.100.41:8000`)
 
 export default class Home extends Component {
-  
+
   sendMessage = () => {
     socket.emit('notifyBot', "I'M HERE", function (err) {
       if (err) {
@@ -23,10 +24,17 @@ export default class Home extends Component {
       <div>
         <div className={styles.container}>
         <img src="./img/Cardinal.png" alt="Cardinal" className={styles.logo} />
-          <h2 className={styles.title}>Welcome</h2>
           <RaisedButton
-            styles={styles.button}
+            backgroundColor="#218EC1"
+            style={{
+              position: 'fixed', 
+              bottom: '0px',
+              left: '0px',
+              height: '60px',
+              width: '300px'
+            }}
             label="Let someone know I'm here" 
+            labelColor="#FFF"
             onClick={this.sendMessage}
             icon={<ActionRecordVoiceOver />} 
           />
