@@ -19,6 +19,7 @@ app.on('window-all-closed', () => {
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
     show: false,
+    frame: false,
     width: 1024,
     height: 728
   });
@@ -235,6 +236,6 @@ app.on('ready', () => {
       }]
     }];
     menu = Menu.buildFromTemplate(template);
-    mainWindow.setMenu(menu);
+    mainWindow.setMenu(null);
   }
 });

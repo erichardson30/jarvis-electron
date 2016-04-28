@@ -6,7 +6,13 @@ export default {
       test: /\.jsx?$/,
       loaders: ['babel-loader'],
       exclude: /node_modules/
-    }, {
+    },
+    {
+      test: /\.(jpg|png)$/,
+      loader: 'file?name=[path][name].[hash].[ext]',
+      include: path.images
+    },
+     {
       test: /\.json$/,
       loader: 'json-loader'
     }]
