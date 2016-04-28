@@ -23,9 +23,3 @@ body {
 .title {
   margin-top:100px;
 }
-.button {
-  position: fixed !important;
-  bottom: 0px;
-  left: 0px;
-  height: 75px !important;
-}

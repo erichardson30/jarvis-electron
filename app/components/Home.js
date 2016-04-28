@@ -26,13 +26,8 @@ export default class Home extends Component {
         <img src="./img/Cardinal.png" alt="Cardinal" className={styles.logo} />
           <RaisedButton
             backgroundColor="#218EC1"
-            style={{
-              position: 'fixed', 
-              bottom: '0px',
-              left: '0px',
-              height: '60px',
-              width: '300px'
-            }}
+            className={styles.button}
+            style={style}
             label="Let someone know I'm here" 
             labelColor="#FFF"
             onClick={this.sendMessage}
@@ -42,4 +37,11 @@ export default class Home extends Component {
       </div>
     );
   }
+}
+const style = {
+  position: 'fixed',
+  bottom: '0px',
+  left: '0px',
+  height: '60px',
+  width: '300px'
 }
