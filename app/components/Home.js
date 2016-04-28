@@ -5,12 +5,15 @@ import io from 'socket.io-client';
 import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
+import camera from '../actions/camera';
+import motion from '../actions/motion';
 
 let socket = io(`http://10.104.100.41:8000`)
 
 export default class Home extends Component {
 
   sendMessage = () => {
+    camera.takePicture();
     socket.emit('notifyBot', "I'M HERE", function (err) {
       if (err) {
         return console.error("Socket error" + err);
@@ -18,7 +21,7 @@ export default class Home extends Component {
       callback();
     });
   }
-  
+
   render() {
     return (
       <div>
@@ -28,10 +31,10 @@ export default class Home extends Component {
             backgroundColor="#218EC1"
             className={styles.button}
             style={style}
-            label="Let someone know I'm here" 
+            label="Let someone know I'm here"
             labelColor="#FFF"
             onClick={this.sendMessage}
-            icon={<ActionRecordVoiceOver />} 
+            icon={<ActionRecordVoiceOver />}
           />
         </div>
       </div>

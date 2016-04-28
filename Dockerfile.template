@@ -30,4 +30,4 @@ RUN npm run build --prefix ./usr/src/app/
 
 WORKDIR /usr/src/app
 
-CMD ["npm", "start"]
+CMD ["/usr/src/app/launch_app.sh"]
