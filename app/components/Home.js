@@ -13,7 +13,7 @@ let socket = io(`http://10.104.100.41:8000`)
 export default class Home extends Component {
 
   sendMessage = () => {
-    camera.takePicture();
+    Camera.takePicture();
     socket.emit('notifyBot', "I'M HERE", function (err) {
       if (err) {
         return console.error("Socket error" + err);
