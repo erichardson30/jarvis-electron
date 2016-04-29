@@ -1,32 +1,28 @@
-'use strict';
+import RaspiCam from 'raspicam';
 
+var camera = new RaspiCam({
+	mode: "photo",
+	output: "./photo/image.jpg",
+	encoding: "jpg",
+	timeout: 1 // take the picture immediately
+});
 
-var RaspiCam = require("raspicam");
+camera.on("start", function( err, timestamp ){
+	console.log("photo started at " + timestamp );
+});
 
-const Camera = {
+camera.on("read", function( err, timestamp, filename ){
+	console.log("photo image captured with filename: " + filename );
+});
 
-	var camera = new RaspiCam({
-		mode: "photo",
-		output: "./photo/image.jpg",
-		encoding: "jpg",
-		timeout: 1 // take the picture immediately
-	});
+camera.on("exit", function( timestamp ){
+	console.log("photo child process has exited at " + timestamp );
+});
 
-	camera.on("start", function( err, timestamp ){
-		console.log("photo started at " + timestamp );
-	});
-
-	camera.on("read", function( err, timestamp, filename ){
-		console.log("photo image captured with filename: " + filename );
-	});
-
-	camera.on("exit", function( timestamp ){
-		console.log("photo child process has exited at " + timestamp );
-	});
-
-	function takePicture(){
-		camera.start();
-	}
+function takePicture(){
+	camera.start();
 }
 
-export default Camera;
+module.exports = {
+	takePicture : takePicture
+};

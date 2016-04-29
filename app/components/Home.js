@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
-import Camera from '../actions/camera';
+import * as Camera from '../actions/camera';
 import Motion from '../actions/motion';
 
 let socket = io(`http://10.104.100.41:8000`)
