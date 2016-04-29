@@ -20,6 +20,7 @@ camera.on("exit", function( timestamp ){
 });
 
 function takePicture(){
+	console.log("taking picture");
 	camera.start();
 }
 
