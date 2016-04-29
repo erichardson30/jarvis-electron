@@ -8,6 +8,4 @@ xset s noblank
 modprobe bcm2835-v4l2
 
 mkdir /root/.config
-sudo matchbox-window-manager -use_titlebar no &
-npm start
-sleep 2s
+sudo matchbox-window-manager -use_titlebar no

@@ -28,6 +28,8 @@ COPY . ./usr/src/app/
 
 RUN npm run build --prefix ./usr/src/app/
 
+CMD ["/usr/src/app/launch_app.sh"]
+
 WORKDIR /usr/src/app
 
-CMD ["/usr/src/app/launch_app.sh"]
+CMD ["npm", "start"]
