@@ -5,7 +5,7 @@
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "main": "main.js",
   "scripts": {
-    "modprobe": "bcm2835-v4l2",    
+    "modprobe": "bcm2835-v4l2",
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js test/**/*.spec.js",
     "test-watch": "npm test -- --watch",
     "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-register --require ./test/setup.js --require co-mocha ./test/e2e.js",
@@ -97,7 +97,7 @@
     "gpio": "^0.2.7",
     "material-ui": "^0.14.4",
     "postcss": "^5.0.19",
-    "raspicam": "^0.2.13",
+    "raspicam-js": "^0.2.12",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",
