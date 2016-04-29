@@ -7,8 +7,8 @@ var gpio4 = gpio.export(4, {
    }
 });
 
-module.exports = {
-
+// module.exports = {
+const Motion = {
   // bind to the "change" event
   gpio4.on("change", function(val) {
      // value will report either 1 or 0 (number) when the value changes
@@ -26,3 +26,5 @@ module.exports = {
      }
   });
 };
+
+export default Motion;
