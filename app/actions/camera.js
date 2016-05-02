@@ -1,3 +1,5 @@
+import RaspiCam from 'raspicam-js';
+
 var camera = new RaspiCam({
     mode: "photo",
     output: "./photo/image.jpg",
