@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import * as Camera from '../actions/camera';
 import Motion from '../actions/motion';
+var mongoose = require('mongoose');
 
 let socket = io(`http://10.104.100.41:8000`)
 
@@ -20,6 +21,12 @@ export default class Home extends Component {
       }
       callback();
     });
+  }
+
+  checkForPendingVisitors = () => {
+
+
+
   }
 
   render() {
@@ -36,6 +43,17 @@ export default class Home extends Component {
             onClick={this.sendMessage}
             icon={<ActionRecordVoiceOver />}
           />
+
+          <RaisedButton
+            backgroundColor="#218EC1"
+            className={styles.button}
+            style={style}
+            label="Check for pending visitors"
+            labelColor="#FFF"
+            onClick={this.checkForPendingVisitors}
+            icon={<ActionRecordVoiceOver />}
+          />
+
         </div>
       </div>
     );
