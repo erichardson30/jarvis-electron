@@ -2,9 +2,10 @@ import RaspiCam from 'raspicam-js';
 
 var camera = new RaspiCam({
     mode: "photo",
-    output: "./photo/image.jpg",
+    output: "image.jpg",
     encoding: "jpg",
-    timeout: 1 // take the picture immediately
+    timeout: 1,
+    nopreview // take the picture immediately
 });
 
 camera.on("start", function( err, timestamp ){

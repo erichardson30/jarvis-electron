@@ -1,5 +1,6 @@
 
 const exec = require('child_process').exec;
+
 var gpio = require("gpio");
 var gpio4 = gpio.export(4, {
    direction: "in",
