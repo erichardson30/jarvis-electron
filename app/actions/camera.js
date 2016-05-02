@@ -2,7 +2,7 @@ import RaspiCam from 'raspicam-js';
 
 var camera = new RaspiCam({
     mode: "photo",
-    output: "image.jpg",
+    output: "./image.jpg",
     encoding: "jpg",
     timeout: 1,
     n: true
