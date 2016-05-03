@@ -7,21 +7,15 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import * as Camera from '../actions/camera';
 import Motion from '../actions/motion';
-
-var mongoose = require('mongoose');
-
+// var mongoose = require('mongoose');
 
 export default class Home extends Component {
 
   sendMessage = () => {
-
     Camera.takePicture();
-
   }
 
   checkForPendingVisitors = () => {
-
-
 
   }
 
@@ -57,6 +51,7 @@ export default class Home extends Component {
     );
   }
 }
+
 const style = {
   position: 'fixed',
   bottom: '0px',

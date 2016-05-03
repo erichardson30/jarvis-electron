@@ -2,7 +2,7 @@ import RaspiCam from 'raspicam-js';
 import io from 'socket.io-client';
 import fs from 'fs';
 
-let socket = io(`http://10.104.100.30:8000`)
+let socket = io(`http://10.104.100.30:8000`);
 
 var camera = new RaspiCam({
     mode: "photo",
@@ -16,7 +16,7 @@ camera.on("start", function( err, timestamp ){
     console.log("photo started at " + timestamp );
 });
 
-camera.on("read", function( err, timestamp, filename ){
+camera.on("read", function( err, timestamp, filename ) {
     console.log("photo image captured with filename: " + filename );
 
     fs.readFile('./' + filename, function(err, buf) {
