@@ -9,7 +9,7 @@ import * as Camera from '../actions/camera';
 import Motion from '../actions/motion';
 var mongoose = require('mongoose');
 
-let socket = io(`http://10.104.100.41:8000`)
+let socket = io(`http://10.104.100.30:8000`)
 
 export default class Home extends Component {
 
@@ -34,6 +34,7 @@ export default class Home extends Component {
       <div>
         <div className={styles.container}>
         <img src="./img/Cardinal.png" alt="Cardinal" className={styles.logo} />
+
           <RaisedButton
             backgroundColor="#218EC1"
             className={styles.button}
@@ -44,10 +45,11 @@ export default class Home extends Component {
             icon={<ActionRecordVoiceOver />}
           />
 
+
           <RaisedButton
             backgroundColor="#218EC1"
             className={styles.button}
-            style={style}
+            style={style2}
             label="Check for pending visitors"
             labelColor="#FFF"
             onClick={this.checkForPendingVisitors}
@@ -63,6 +65,14 @@ const style = {
   position: 'fixed',
   bottom: '0px',
   left: '0px',
+  height: '60px',
+  width: '300px'
+}
+
+const style2 = {
+  position: 'fixed',
+  bottom: '0px',
+  right: '0px',
   height: '60px',
   width: '300px'
 }
