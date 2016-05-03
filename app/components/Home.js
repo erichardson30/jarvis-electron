@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import * as Camera from '../actions/camera';
 import Motion from '../actions/motion';
+import fs from 'fs';
 var mongoose = require('mongoose');
 
 let socket = io(`http://10.104.100.30:8000`)
@@ -14,13 +15,18 @@ let socket = io(`http://10.104.100.30:8000`)
 export default class Home extends Component {
 
   sendMessage = () => {
-    Camera.takePicture();
-    socket.emit('notifyBot', "I'M HERE", function (err) {
-      if (err) {
-        return console.error("Socket error" + err);
-      }
-      callback();
+    Camera.takePicture().then(function() {
+      fs.readFile('./image.jpg', function(err, buf) {
+        socket.emit('image', { image: true, buffer: buf.toString('base64') });
+        socket.emit('notifyBot', "I'M HERE", function (err) {
+          if (err) {
+            return console.error("Socket error" + err);
+          }
+          callback();
+        });
+      })
     });
+
   }
 
   checkForPendingVisitors = () => {
