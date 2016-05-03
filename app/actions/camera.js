@@ -18,8 +18,13 @@ camera.on("start", function( err, timestamp ){
 
 camera.on("read", function( err, timestamp, filename ) {
     console.log("photo image captured with filename: " + filename );
+});
 
-    fs.readFile('./' + filename, function(err, buf) {
+camera.on("exit", function( timestamp ){
+    console.log("photo child process has exited at " + timestamp );
+
+    fs.readFile('./image.jpg', function(err, buf) {
+
       socket.emit('image', { image: true, buffer: buf.toString('base64') });
       socket.emit('notifyBot', "I'M HERE", function (err) {
         if (err) {
@@ -27,10 +32,9 @@ camera.on("read", function( err, timestamp, filename ) {
         }
         callback();
       });
-});
 
-camera.on("exit", function( timestamp ){
-    console.log("photo child process has exited at " + timestamp );
+    })
+
 });
 
 function takePicture(){
