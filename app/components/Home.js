@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import styles from './Home.css';
-import io from 'socket.io-client';
 import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
-import * as Camera from '../actions/camera';
+import Visitor from './Visitor';
 import Motion from '../actions/motion';
-let socket = io(`http://10.104.100.30:8000`);
+import * as Camera from '../actions/camera';
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/my_database');
 
+// import mongoose from 'mongoose';
+// mongoose.connect('mongodb://localhost/my_database');
 
 export default class Home extends Component {
 
@@ -23,6 +22,7 @@ export default class Home extends Component {
   }
 
   sendMessage = () => {
+    responsiveVoice.speak("Thank you. I will let someone know you are here.", "UK English Male", {rate: 0.8});
     Camera.takePicture();
   }
 
@@ -33,11 +33,13 @@ export default class Home extends Component {
 
   render() {
 
-    var visitors = this.state.visitors.map(visitor, i) {
-      return (
-        <Visitor data=visitor index=(i+ 1) />
-      );
-    }
+    var visitors = [];
+
+    // visitors = this.state.visitors.map(visitor, i) {
+    //   return (
+    //     <Visitor data=visitor index=(i+ 1) />
+    //   );
+    // }
 
     return (
       <div>
@@ -54,6 +56,8 @@ export default class Home extends Component {
             icon={<ActionRecordVoiceOver />}
           />
 
+          <Visitor />
+
           <div>
             {visitors}
           </div>
@@ -66,8 +70,8 @@ export default class Home extends Component {
 
 const style = {
   position: 'fixed',
-  top: '20px',
-  left: '200px',
+  bottom: '20px',
+  left: '240px',
   height: '60px',
   width: '400px'
 }

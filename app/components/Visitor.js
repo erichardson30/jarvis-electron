@@ -6,34 +6,38 @@ import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import * as Camera from '../actions/camera';
-let socket = io(`http://10.104.100.30:8000`);
+let socket = io(`https://jarviscsg.herokuapp.com:13397`);
 
 export default class Home extends Component {
 
   sendMessage = () => {
+    responsiveVoice.speak("Thank you. I will let Eric know you are here.", "UK English Male", {rate: 0.8});
+    socket.emit('notifyBot', "ERIC, your sub is HERE", function (err) {
+      if (err) {
+        return console.error("Socket error" + err);
+      }
+      callback();
+    });
     Camera.takePicture();
   }
 
   render() {
 
     // parse this.props.data into text
-    var label = "Click here if you are Jimmy Johns looking for Eric";
+    var label = "Are you Jimmy Johns looking for Eric";
     var position = (this.props.index * 80) + 100;
-    var top = position.toString() + 'px';
+    var bottom = position.toString() + 'px';
 
     const style = {
       position: 'fixed',
-      top: top,
-      left: '200px',
+      bottom: bottom,
+      left: '240px',
       height: '60px',
       width: '400px'
     }
 
     return (
       <div>
-        <div className={styles.container}>
-        <img src="./img/Cardinal.png" alt="Cardinal" className={styles.logo} />
-
           <RaisedButton
             backgroundColor="#218EC1"
             className={styles.button}
@@ -43,8 +47,6 @@ export default class Home extends Component {
             onClick={this.sendMessage}
             icon={<ActionRecordVoiceOver />}
           />
-
-        </div>
       </div>
     );
   }
