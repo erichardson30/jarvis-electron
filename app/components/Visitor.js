@@ -6,37 +6,27 @@ import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import * as Camera from '../actions/camera';
-import Motion from '../actions/motion';
 let socket = io(`http://10.104.100.30:8000`);
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/my_database');
-
-
 export default class Home extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      visitors: []
-    };
-  }
 
   sendMessage = () => {
     Camera.takePicture();
   }
 
-  loadExpectingVisitors = () => {
-
-
-  }
-
   render() {
 
-    var visitors = this.state.visitors.map(visitor, i) {
-      return (
-        <Visitor data=visitor index=(i+ 1) />
-      );
+    // parse this.props.data into text
+    var label = "Click here if you are Jimmy Johns looking for Eric";
+    var position = (this.props.index * 80) + 100;
+    var top = position.toString() + 'px';
+
+    const style = {
+      position: 'fixed',
+      top: top,
+      left: '200px',
+      height: '60px',
+      width: '400px'
     }
 
     return (
@@ -48,26 +38,14 @@ export default class Home extends Component {
             backgroundColor="#218EC1"
             className={styles.button}
             style={style}
-            label="Let someone know I'm here"
+            label={label}
             labelColor="#FFF"
             onClick={this.sendMessage}
             icon={<ActionRecordVoiceOver />}
           />
 
-          <div>
-            {visitors}
-          </div>
-
         </div>
       </div>
     );
   }
-}
-
-const style = {
-  position: 'fixed',
-  top: '20px',
-  left: '200px',
-  height: '60px',
-  width: '400px'
 }

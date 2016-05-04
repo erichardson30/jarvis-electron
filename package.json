@@ -97,6 +97,7 @@
     "gpio": "^0.2.7",
     "material-ui": "^0.14.4",
     "moment": "^2.13.0",
+    "mongoose": "^4.4.14",
     "postcss": "^5.0.19",
     "raspicam-js": "^0.3.12",
     "react": "^15.0.1",
