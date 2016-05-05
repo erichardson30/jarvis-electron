@@ -1,45 +1,55 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import styles from './Home.css';
+import axios from 'axios';
 import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
-import Visitor from './Visitor';
-import Motion from '../actions/motion';
-import * as Camera from '../actions/camera';
-
-
-// import mongoose from 'mongoose';
-// mongoose.connect('mongodb://localhost/my_database');
+import Modal from 'react-modal';
+import VisitorModal from './VisitorModal';
+// import Motion from '../sensors/motion';
+// import * as Camera from '../sensors/camera';
 
 export default class Home extends Component {
 
   constructor(props) {
     super(props);
+    
     this.state = {
-      visitors: []
-    };
+      visitors: [],
+      modalIsOpen: false
+    }
   }
+  
+  closeModal = () => {
+        this.setState({ modalIsOpen: false});
+    }
 
   sendMessage = () => {
     responsiveVoice.speak("Thank you. I will let someone know you are here.", "UK English Male", {rate: 0.8});
     Camera.takePicture();
   }
-
-  loadExpectingVisitors = () => {
-
-
+  
+  checkIn = () => {
+    let self = this;
+    axios.get('http://jarviscsg-api.herokuapp.com/api/schedules').then(function(response) {
+      if (response.data.length > 0) {
+        self.setState({
+          visitors: response.data,
+          modalIsOpen: true
+        });
+      } else {
+        self.sendMessage();
+      }
+    });    
+  }
+  
+  notifyEmployee = (data) => {
+    responsiveVoice.speak("Thank you. I will get " + data.firstName + "right now.", "UK English Male", {rate: 0.8});
+    Camera.takePicture();
+    this.closeModal();
   }
 
   render() {
-
-    var visitors = [];
-
-    // visitors = this.state.visitors.map(visitor, i) {
-    //   return (
-    //     <Visitor data=visitor index=(i+ 1) />
-    //   );
-    // }
 
     return (
       <div>
@@ -50,18 +60,17 @@ export default class Home extends Component {
             backgroundColor="#218EC1"
             className={styles.button}
             style={style}
-            label="Let someone know I'm here"
+            label="Check In"
             labelColor="#FFF"
-            onClick={this.sendMessage}
+            onClick={this.checkIn}
             icon={<ActionRecordVoiceOver />}
           />
-
-          <Visitor />
-
-          <div>
-            {visitors}
-          </div>
-
+          
+          <VisitorModal
+            open={this.state.modalIsOpen}
+            close = {this.closeModal}
+            visitors = {this.state.visitors}
+            notifyEmployee = {this.notifyEmployee} />
         </div>
       </div>
     );
