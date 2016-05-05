@@ -6,8 +6,8 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import Modal from 'react-modal';
 import VisitorModal from './VisitorModal';
-// import Motion from '../sensors/motion';
-// import * as Camera from '../sensors/camera';
+import Motion from '../sensors/motion';
+import * as Camera from '../sensors/camera';
 
 export default class Home extends Component {
 
