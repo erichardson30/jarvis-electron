@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import fs from 'fs';
 
 let socket = io(`http://10.104.100.30:8000`);
+var data = {};
 
 var camera = new RaspiCam({
     mode: "photo",
@@ -22,11 +23,24 @@ camera.on("read", function( err, timestamp, filename ) {
 
 camera.on("exit", function(timestamp) {
     console.log("photo child process has exited at " + timestamp );
-    console.log("callback");
-    callback();
+    this.notify();
 });
 
-function takePicture(callback) {
+function notify() {
+
+  fs.readFile('./image.jpg', function(err, buf) {
+    socket.emit('image', { image: true, buffer: buf.toString('base64') });
+    socket.emit('notifyBot', "I'M HERE", function (err) {
+      if (err) {
+        return console.error("Socket error" + err);
+      }
+    });
+  })
+
+}
+
+function takePicture(data) {
+    this.data = data;
     camera.start();
 }
 

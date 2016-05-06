@@ -27,24 +27,6 @@ export default class Home extends Component {
         this.setState({ modalIsOpen: false});
     }
 
-  sendMessage = () => {
-
-    responsiveVoice.speak("Thank you. I will let someone know you are here.", "UK English Male", {rate: 0.8});
-    Camera.takePicture(this.notify);
-  }
-
-  notify = () => {
-
-    fs.readFile('./image.jpg', function(err, buf) {
-      socket.emit('image', { image: true, buffer: buf.toString('base64') });
-      socket.emit('notifyBot', "I'M HERE", function (err) {
-        if (err) {
-          return console.error("Socket error" + err);
-        }
-      });
-    })
-  }
-
   checkIn = () => {
     let self = this;
     axios.get('http://jarviscsg-api.herokuapp.com/api/schedules').then(function(response) {
@@ -54,14 +36,19 @@ export default class Home extends Component {
           modalIsOpen: true
         });
       } else {
-        self.sendMessage();
+
+        // need to create proper data object for office manager // jeff
+        data = {
+
+        };
+        self.notifyEmployee(data);
       }
     });
   }
 
   notifyEmployee = (data) => {
-    responsiveVoice.speak("Thank you. I will notify " + data.firstName + "right now.", "UK English Male", {rate: 0.8});
-    Camera.takePicture(this.notify);
+    responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
+    Camera.takePicture(data);
     this.closeModal();
   }
 
