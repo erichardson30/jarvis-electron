@@ -8,27 +8,42 @@ import Modal from 'react-modal';
 import VisitorModal from './VisitorModal';
 import Motion from '../sensors/motion';
 import * as Camera from '../sensors/camera';
+import fs from 'fs';
+import io from 'socket.io-client';
+let socket = io(`http://10.104.100.30:8000`);
 
 export default class Home extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       visitors: [],
       modalIsOpen: false
     }
   }
-  
+
   closeModal = () => {
         this.setState({ modalIsOpen: false});
     }
 
   sendMessage = () => {
     responsiveVoice.speak("Thank you. I will let someone know you are here.", "UK English Male", {rate: 0.8});
-    Camera.takePicture();
+    Camera.takePicture(notify);
   }
-  
+
+  notify = () => {
+
+    fs.readFile('./image.jpg', function(err, buf) {
+      socket.emit('image', { image: true, buffer: buf.toString('base64') });
+      socket.emit('notifyBot', "I'M HERE", function (err) {
+        if (err) {
+          return console.error("Socket error" + err);
+        }
+      });
+    })
+  }
+
   checkIn = () => {
     let self = this;
     axios.get('http://jarviscsg-api.herokuapp.com/api/schedules').then(function(response) {
@@ -40,9 +55,9 @@ export default class Home extends Component {
       } else {
         self.sendMessage();
       }
-    });    
+    });
   }
-  
+
   notifyEmployee = (data) => {
     responsiveVoice.speak("Thank you. I will get " + data.firstName + "right now.", "UK English Male", {rate: 0.8});
     Camera.takePicture();
@@ -65,7 +80,7 @@ export default class Home extends Component {
             onClick={this.checkIn}
             icon={<ActionRecordVoiceOver />}
           />
-          
+
           <VisitorModal
             open={this.state.modalIsOpen}
             close = {this.closeModal}
