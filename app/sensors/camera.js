@@ -38,12 +38,12 @@ function notify() {
     });
   })
 
-}
+};
 
 function takePicture(data) {
     this.data = data;
     camera.start();
-}
+};
 
 module.exports = {
     takePicture : takePicture
