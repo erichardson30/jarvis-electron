@@ -23,22 +23,18 @@ camera.on("read", function( err, timestamp, filename ) {
 
 camera.on("exit", function(timestamp) {
     console.log("photo child process has exited at " + timestamp );
-    self.notify();
+
+    console.log("notify employee: " + data.toString());
+    fs.readFile('./image.jpg', function(err, buf) {
+      socket.emit('image', { image: true, buffer: buf.toString('base64') });
+      socket.emit('notifyBot', "I'M HERE", function (err) {
+        if (err) {
+          return console.error("Socket error" + err);
+        }
+      });
+    })
+
 });
-
-function notify() {
-
-  console.log("notify employee: " + data.toString());
-  fs.readFile('./image.jpg', function(err, buf) {
-    socket.emit('image', { image: true, buffer: buf.toString('base64') });
-    socket.emit('notifyBot', "I'M HERE", function (err) {
-      if (err) {
-        return console.error("Socket error" + err);
-      }
-    });
-  })
-
-};
 
 function takePicture(data) {
     this.data = data;
