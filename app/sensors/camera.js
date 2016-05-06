@@ -24,7 +24,7 @@ camera.on("read", function( err, timestamp, filename ) {
 camera.on("exit", function(timestamp) {
     console.log("photo child process has exited at " + timestamp );
 
-    console.log("notify employee: " + data.toString());
+    console.log("notify employee: " + data.firstName);
     fs.readFile('./image.jpg', function(err, buf) {
       socket.emit('image', { image: true, buffer: buf.toString('base64') });
       socket.emit('notifyBot', "I'M HERE", function (err) {
