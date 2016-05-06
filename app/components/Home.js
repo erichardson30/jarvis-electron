@@ -28,6 +28,7 @@ export default class Home extends Component {
     }
 
   sendMessage = () => {
+
     responsiveVoice.speak("Thank you. I will let someone know you are here.", "UK English Male", {rate: 0.8});
     Camera.takePicture(notify);
   }
@@ -59,8 +60,8 @@ export default class Home extends Component {
   }
 
   notifyEmployee = (data) => {
-    responsiveVoice.speak("Thank you. I will get " + data.firstName + "right now.", "UK English Male", {rate: 0.8});
-    Camera.takePicture();
+    responsiveVoice.speak("Thank you. I will notify " + data.firstName + "right now.", "UK English Male", {rate: 0.8});
+    Camera.takePicture(notify);
     this.closeModal();
   }
 
