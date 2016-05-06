@@ -40,7 +40,7 @@ export default class Home extends Component {
         // need to create proper data object for office manager // jeff
         data = {
           firstName: "someone",
-          userName; "erichardson"
+          userName: "erichardson"
         };
         self.notifyEmployee(data);
       }
