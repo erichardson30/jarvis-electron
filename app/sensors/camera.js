@@ -14,20 +14,21 @@ var camera = new RaspiCam({
 });
 
 camera.on("start", function( err, timestamp ){
-    console.log("photo started at " + timestamp );
+    // console.log("photo started at " + timestamp );
 });
 
 camera.on("read", function( err, timestamp, filename ) {
-    console.log("photo image captured with filename: " + filename );
+    // console.log("photo image captured with filename: " + filename );
 });
 
 camera.on("exit", function(timestamp) {
     console.log("photo child process has exited at " + timestamp );
-    this.notify();
+    self.notify();
 });
 
 function notify() {
 
+  console.log("notify employee: " + data.toString());
   fs.readFile('./image.jpg', function(err, buf) {
     socket.emit('image', { image: true, buffer: buf.toString('base64') });
     socket.emit('notifyBot', "I'M HERE", function (err) {
