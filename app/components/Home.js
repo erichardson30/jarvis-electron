@@ -84,7 +84,7 @@ export default class Home extends Component {
 const style = {
   position: 'fixed',
   bottom: '20px',
-  left: '240px',
+  left: '200px',
   height: '60px',
   width: '400px'
 }
