@@ -29,6 +29,8 @@ export default class Home extends Component {
 
   checkIn = () => {
     let self = this;
+    responseVoice.speak(" ");
+
     axios.get('http://jarviscsg-api.herokuapp.com/api/schedules/now').then(function(response) {
       if (response.data.length > 0) {
         self.setState({
@@ -44,8 +46,7 @@ export default class Home extends Component {
   notifyManager = () => {
 
     console.log("notifying mangaer")
-    responsiveVoice.cancel();
-    responsiveVoice.speak("Thank you. I will let someone know you are here.", "UK English Male", {rate: 0.8});
+    responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
 
     // need to create proper data object for office manager // jeff
     let data = {
@@ -55,8 +56,8 @@ export default class Home extends Component {
   }
 
   notifyEmployee = (data) => {
-    responsiveVoice.cancel();    
-    responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
+    
+    responsiveVoice.speak("Thank you I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
     Camera.takePicture(data);
     this.closeModal();
   }
