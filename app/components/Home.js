@@ -3,6 +3,7 @@ import styles from './Home.css';
 import axios from 'axios';
 import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
+import IconButton from 'material-ui/lib/icon-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import Modal from 'react-modal';
 import VisitorModal from './VisitorModal';
@@ -54,22 +55,20 @@ export default class Home extends Component {
   }
 
   render() {
-
     return (
       <div>
         <div className={styles.container}>
-        <img src="./img/Cardinal.png" alt="Cardinal" className={styles.logo} />
-
+          <img src="./img/Cardinal.png" alt="Cardinal" className={styles.logo} />
           <RaisedButton
-            backgroundColor="#218EC1"
+            backgroundColor="#207aa4"
             className={styles.button}
-            style={style}
+            style={style.button}
             label="Check In"
             labelColor="#FFF"
+            labelStyle={style.label}
             onClick={this.checkIn}
-            icon={<ActionRecordVoiceOver />}
+            icon={<ActionRecordVoiceOver style={style.icon}/>}
           />
-
           <VisitorModal
             open={this.state.modalIsOpen}
             close = {this.closeModal}
@@ -82,9 +81,18 @@ export default class Home extends Component {
 }
 
 const style = {
-  position: 'fixed',
-  bottom: '20px',
-  left: '200px',
-  height: '60px',
-  width: '400px'
+  button : {
+    position: 'fixed',
+    bottom: '20px',
+    marginLeft: '-200px',
+    height: '80px',
+    width: '400px'
+  },
+  label : {
+    fontSize: '30px'
+  },
+  icon : {
+    height : '40px',
+    width : '40px'
+  }
 }

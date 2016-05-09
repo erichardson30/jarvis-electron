@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './Home.css';
 import axios from 'axios';
 import RaisedButton from 'material-ui/lib/raised-button';
 
@@ -16,12 +15,23 @@ export default class VisitorItem extends Component {
     return (
       <div>
         <RaisedButton
-            backgroundColor="#218EC1"
+            backgroundColor="#207aa4"
             label={this.props.label}
+            style={style}
             labelColor="#FFF"
+            labelStyle = {labelStyle}
             onClick={this.checkIn}
         />
       </div>
     )
   }
+}
+
+const style = {
+  marginBottom : '20px',
+  height : '70px',
+}
+
+const labelStyle = {
+  fontSize: '25px'
 }
