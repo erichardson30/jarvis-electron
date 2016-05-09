@@ -36,15 +36,24 @@ export default class Home extends Component {
           modalIsOpen: true
         });
       } else {
-
-        // need to create proper data object for office manager // jeff
-        let data = {
-          firstName: "someone",
-          userName: "erichardson"
-        };
-        self.notifyEmployee(data);
+        console.log("notifying mangaer")
+        self.notifyManager();
       }
     });
+  }
+
+  notifyManager = () => {
+
+    responsiveVoice.speak("Thank you. I will let someone know you are here.", "UK English Male", {rate: 0.8});
+
+    // need to create proper data object for office manager // jeff
+    let data = {
+      firstName: "someone",
+      userName: "erichardson"
+    };
+
+    Camera.takePicture(data);
+    this.closeModal();
   }
 
   notifyEmployee = (data) => {
