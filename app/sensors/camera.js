@@ -2,7 +2,7 @@ import RaspiCam from 'raspicam-js';
 import io from 'socket.io-client';
 import fs from 'fs';
 
-let socket = io(`http://10.104.100.30:8000`);
+let socket = io(`http://jarviscsg.herokuapp.com:80`);
 var data = {};
 
 var camera = new RaspiCam({

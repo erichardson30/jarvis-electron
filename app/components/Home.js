@@ -10,7 +10,7 @@ import Motion from '../sensors/motion';
 import * as Camera from '../sensors/camera';
 import fs from 'fs';
 import io from 'socket.io-client';
-let socket = io(`http://10.104.100.30:8000`);
+let socket = io(`http://jarviscsg.herokuapp.com:80`);
 
 export default class Home extends Component {
 
@@ -29,7 +29,7 @@ export default class Home extends Component {
 
   checkIn = () => {
     let self = this;
-    axios.get('http://jarviscsg-api.herokuapp.com/api/schedules').then(function(response) {
+    axios.get('http://jarviscsg-api.herokuapp.com/api/schedules/now').then(function(response) {
       if (response.data.length > 0) {
         self.setState({
           visitors: response.data,
