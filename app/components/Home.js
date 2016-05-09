@@ -38,7 +38,7 @@ export default class Home extends Component {
       } else {
 
         // need to create proper data object for office manager // jeff
-        var data = {
+        let data = {
           firstName: "someone",
           userName: "erichardson"
         };
