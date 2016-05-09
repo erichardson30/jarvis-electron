@@ -4,7 +4,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][david_img]][david_site]
 
-![](./app.jarvis.png)
+![](./app/jarvis.png)
 
 > Based off https://github.com/chentsulin/electron-react-boilerplate
 
