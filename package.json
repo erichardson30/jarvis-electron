@@ -55,7 +55,6 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.7.2",
     "chromedriver": "^2.21.2",
     "css-loader": "^0.23.1",
     "del": "^2.2.0",
@@ -80,6 +79,7 @@
   },
   "dependencies": {
     "axios": "^0.11.0",
+    "babel-register": "^6.7.2",
     "concurrently": "^2.0.0",
     "cron": "^1.1.0",
     "cross-env": "^1.0.7",
