@@ -1,25 +1,25 @@
-# electron-react-boilerplate
+# J.A.R.V.I.S -- A virtual receptionist
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][david_img]][david_site]
 
-![](./erb-logo.png)
+![](./app.jarvis.png)
 
-> Live editing development on desktop app
+> Based off https://github.com/chentsulin/electron-react-boilerplate
 
-[Electron](http://electron.atom.io/) application boilerplate based on [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), [React Router](https://github.com/reactjs/react-router), [Webpack](http://webpack.github.io/docs/), [React Transform HMR](https://github.com/gaearon/react-transform-hmr) for rapid application development
+[Electron](http://electron.atom.io/) application based on [React](https://facebook.github.io/react/), [Webpack](http://webpack.github.io/docs/), [React Transform HMR](https://github.com/gaearon/react-transform-hmr) for rapid application development
 
-## Screenshot
+Running on a Raspberry Pi3 on top of [Resin.io](http://resin.io) using [Docker](https://docker.com) to deploy on the device.
 
-![](https://cloud.githubusercontent.com/assets/3382565/10557547/b1f07a4e-74e3-11e5-8d27-79ab6947d429.gif)
+This application uses [Socket.io](http://socket.io) to communicate to another application to transmit messages and images.
 
 ## Install
 
 First, clone the repo via git:
 
 ```bash
-git clone https://github.com/chentsulin/electron-react-boilerplate.git your-project-name
+git clone https://github.com/erichardson30/jarvis-electron.git your-project-name
 ```
 
 And then install dependencies.
@@ -56,17 +56,6 @@ $ npm run dev
 - Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
 
 *See [electron-debug](https://github.com/sindresorhus/electron-debug) for more information.*
-
-#### Toggle Redux DevTools
-
-- All platforms: <kbd>Ctrl+H</kbd>
-
-*See [redux-devtools-dock-monitor](https://github.com/gaearon/redux-devtools-dock-monitor) for more information.*
-
-#### Redux Devtools Window
-
-Now you can implement it using [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools) with a [remote monitor](https://github.com/zalmoxisus/remote-redux-devtools#remote-monitoring) by yourself.
-
 
 ## Externals
 
@@ -141,17 +130,12 @@ If you want to have native-like User Interface (OS X El Capitan and Windows 10),
 
 ## Maintainers
 
-- [C. T. Lin](https://github.com/chentsulin)
-- [Jhen-Jie Hong](https://github.com/jhen0409)
+- [Eric Richardson](https://github.com/erichardson30)
+- [Chris Becom](https://github.com/cnbecom)
 
 
 ## License
-MIT © [C. T. Lin](https://github.com/chentsulin)
+MIT © [Eric Richardson](https://github.com/erichardson30)
 
 [npm-image]: https://img.shields.io/npm/v/electron-react-boilerplate.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/electron-react-boilerplate
-[travis-image]: https://travis-ci.org/chentsulin/electron-react-boilerplate.svg?branch=master
-[travis-url]: https://travis-ci.org/chentsulin/electron-react-boilerplate
-[david_img]: https://img.shields.io/david/chentsulin/electron-react-boilerplate.svg
-[david_site]: https://david-dm.org/chentsulin/electron-react-boilerplate
-# jarvis-electron
