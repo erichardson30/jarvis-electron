@@ -36,7 +36,6 @@ export default class Home extends Component {
           modalIsOpen: true
         });
       } else {
-        console.log("notifying mangaer")
         self.notifyManager();
       }
     });
@@ -44,19 +43,19 @@ export default class Home extends Component {
 
   notifyManager = () => {
 
+    console.log("notifying mangaer")
+    responsiveVoice.cancel();
     responsiveVoice.speak("Thank you. I will let someone know you are here.", "UK English Male", {rate: 0.8});
 
     // need to create proper data object for office manager // jeff
     let data = {
-      firstName: "someone",
-      userName: "erichardson"
+      firstName: "jeff"
     };
-
     Camera.takePicture(data);
-    this.closeModal();
   }
 
   notifyEmployee = (data) => {
+    responsiveVoice.cancel();    
     responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
     Camera.takePicture(data);
     this.closeModal();
