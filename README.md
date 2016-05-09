@@ -1,8 +1,6 @@
 # J.A.R.V.I.S -- A virtual receptionist
 
 [![NPM version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Dependency Status][david_img]][david_site]
 
 ![](./app/jarvis.png)
 
