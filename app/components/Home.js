@@ -1,47 +1,90 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import styles from './Home.css';
-import io from 'socket.io-client';
+import axios from 'axios';
 import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
-
-let socket = io(`http://10.104.100.41:8000`)
+import Modal from 'react-modal';
+import VisitorModal from './VisitorModal';
+import Motion from '../sensors/motion';
+import * as Camera from '../sensors/camera';
+import fs from 'fs';
+import io from 'socket.io-client';
+let socket = io(`http://10.104.100.30:8000`);
 
 export default class Home extends Component {
 
-  sendMessage = () => {
-    socket.emit('notifyBot', "I'M HERE", function (err) {
-      if (err) {
-        return console.error("Socket error" + err);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      visitors: [],
+      modalIsOpen: false
+    }
+  }
+
+  closeModal = () => {
+        this.setState({ modalIsOpen: false});
+    }
+
+  checkIn = () => {
+    let self = this;
+    axios.get('http://jarviscsg-api.herokuapp.com/api/schedules').then(function(response) {
+      if (response.data.length > 0) {
+        self.setState({
+          visitors: response.data,
+          modalIsOpen: true
+        });
+      } else {
+
+        // need to create proper data object for office manager // jeff
+        data = {
+          firstName: "someone",
+          userName: "erichardson"
+        };
+        self.notifyEmployee(data);
       }
-      callback();
     });
   }
-  
+
+  notifyEmployee = (data) => {
+    responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
+    Camera.takePicture(data);
+    this.closeModal();
+  }
+
   render() {
+
     return (
       <div>
         <div className={styles.container}>
         <img src="./img/Cardinal.png" alt="Cardinal" className={styles.logo} />
+
           <RaisedButton
             backgroundColor="#218EC1"
             className={styles.button}
             style={style}
-            label="Let someone know I'm here" 
+            label="Check In"
             labelColor="#FFF"
-            onClick={this.sendMessage}
-            icon={<ActionRecordVoiceOver />} 
+            onClick={this.checkIn}
+            icon={<ActionRecordVoiceOver />}
           />
+
+          <VisitorModal
+            open={this.state.modalIsOpen}
+            close = {this.closeModal}
+            visitors = {this.state.visitors}
+            notifyEmployee = {this.notifyEmployee} />
         </div>
       </div>
     );
   }
 }
+
 const style = {
   position: 'fixed',
-  bottom: '0px',
-  left: '0px',
+  bottom: '20px',
+  left: '200px',
   height: '60px',
-  width: '300px'
+  width: '400px'
 }
