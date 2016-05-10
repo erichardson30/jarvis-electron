@@ -48,7 +48,7 @@ export default class Home extends Component {
 
     console.log("notifying mangaer")
     responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
-
+    this.closeModal();
     // need to create proper data object for office manager // jeff
     let data = {
       firstName: "jeff"
@@ -58,7 +58,7 @@ export default class Home extends Component {
 
   notifyEmployee = (data) => {
 
-    responsiveVoice.speak("Thank you I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
+    responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
     Camera.takePicture(data);
     this.closeModal();
   }
@@ -82,7 +82,8 @@ export default class Home extends Component {
             open={this.state.modalIsOpen}
             close = {this.closeModal}
             visitors = {this.state.visitors}
-            notifyEmployee = {this.notifyEmployee} />
+            notifyEmployee = {this.notifyEmployee}
+            notifyManager = {this.notifyManager} />
         </div>
       </div>
     );
@@ -93,9 +94,9 @@ const style = {
   button : {
     position: 'fixed',
     bottom: '20px',
-    marginLeft: '-200px',
+    marginLeft: '-150px',
     height: '80px',
-    width: '400px'
+    width: '300px'
   },
   label : {
     fontSize: '30px'

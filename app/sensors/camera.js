@@ -25,20 +25,20 @@ camera.on("exit", function(timestamp) {
     console.log("photo child process has exited at " + timestamp );
 
     console.log("notify employee: " + data.firstName);
-    let message = data.firstName + ', someone is here to see you at the front'
+    // let message = data.firstName + ', someone is here to see you at the front'
     fs.readFile('./image.jpg', function(err, buf) {
-      socket.emit('image', { image: true, buffer: buf.toString('base64') });
-      socket.emit('notifyBot', message, function (err) {
-        if (err) {
-          return console.error("Socket error" + err);
-        }
-      });
+      socket.emit('checkIn', { image: true, buffer: buf.toString('base64'), data: data });
+    //   socket.emit('notifyBot', message, function (err) {
+    //     if (err) {
+    //       return console.error("Socket error" + err);
+    //     }
+    //   });
     })
 
 });
 
-function takePicture(data) {
-    this.data = data;
+function takePicture(userData) {
+    data = userData;
     camera.start();
 };
 

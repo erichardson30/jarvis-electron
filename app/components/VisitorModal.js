@@ -12,7 +12,11 @@ export default class VisitorModal extends Component {
     }
     
   checkIn = (data) => {
+    if(data.expecting) {
       this.props.notifyEmployee(data);
+    } else {
+      this.props.notifyManager();
+    }
   }
     
   renderData() {
@@ -41,9 +45,11 @@ export default class VisitorModal extends Component {
               onClick={this.closeModal}
               icon={<Clear />}
             />
-          { this.renderData() }
-          <div>
-          <RaisedButton
+            <div style={modalStyle.buttonGroup}>
+              { this.renderData() }
+            </div>
+           <div>
+           <RaisedButton
               backgroundColor="#bf871f"
               label="Notify someone else"
               labelColor="#FFF"
@@ -83,6 +89,9 @@ const modalStyle = {
     outline                    : 'none',
     padding                    : '0px',
     backgroundColor   : 'rgba(36, 36, 36, 0.25)'
+  },
+  buttonGroup : {
+    marginTop: '60px'
   }
 }
 
