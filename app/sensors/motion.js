@@ -2,7 +2,7 @@
 const exec = require('child_process').exec;
 
 var moment = require("moment");
-var proximity = require('prox-hcsr04');
+var proximity = require('proximity-hcsr04');
 
 var gpio = require("gpio");
 var gpio4 = gpio.export(4, {
@@ -36,3 +36,31 @@ gpio4.on("change", function(val) {
       timestamp = moment().add(1, 'm');
     }
 });
+
+
+var triggerPin = gpio.export(23, {
+   direction: "out",
+   ready: function() {
+   }
+});
+
+var echoPin = gpio.export(24, {
+   direction: "out",
+   ready: function() {
+   }
+});
+
+var proximityLib = require('prox-hcsr04');
+var proximity = proximityLib.use(triggerPin, echoPin);
+
+function printDistance() {
+  proximity.getDistance(function(err, distance) {
+    if (err) throw err;
+
+    console.log("Distance: ", distance, "cm away.");
+
+    printDistance();
+  });
+}
+
+printDistance();
