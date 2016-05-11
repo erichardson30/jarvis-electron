@@ -58,7 +58,7 @@ gpio4.on("change", function(val) {
 
 var init = function(config) {
 
-    console.log("launching proximity sensor")
+    console.log("launching proximity sensor with config of: ")
     var sensor = usonic.sensor(config.echoPin, config.triggerPin, config.timeout);
     console.log(config);
     var distances;
