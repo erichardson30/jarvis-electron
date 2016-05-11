@@ -23,7 +23,7 @@ export default {
     libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.node'],
+    extensions: ['', '.js', '.jsx'],
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
   plugins: [

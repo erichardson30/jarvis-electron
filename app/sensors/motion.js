@@ -2,7 +2,7 @@
 const exec = require('child_process').exec;
 
 var moment = require("moment");
-var usonic = require('r-pi-usonic');
+var proximity = require('prox-hcsr04');
 
 var gpio = require("gpio");
 var gpio4 = gpio.export(4, {
