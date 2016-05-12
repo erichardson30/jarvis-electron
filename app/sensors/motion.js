@@ -2,6 +2,7 @@
 const exec = require('child_process').exec;
 
 var moment = require("moment");
+
 var gpio = require("gpio");
 var gpio4 = gpio.export(4, {
    direction: "in",
@@ -34,17 +35,3 @@ gpio4.on("change", function(val) {
       timestamp = moment().add(1, 'm');
     }
 });
-
-// var proximity = proximityLib.use(triggerPin, echoPin);
-//
-// function printDistance() {
-//   proximity.getDistance(function(err, distance) {
-//     if (err) throw err;
-//
-//     console.log("Distance: ", distance, "cm away.");
-//
-//     printDistance();
-//   });
-// }
-//
-// printDistance();
