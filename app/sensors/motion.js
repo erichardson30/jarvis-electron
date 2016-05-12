@@ -2,13 +2,14 @@
 const exec = require('child_process').exec;
 
 var moment = require("moment");
-
 var gpio = require("gpio");
 var gpio4 = gpio.export(4, {
    direction: "in",
    ready: function() {
    }
 });
+var proximityLib = require('./proximity');
+var proximity = proximityLib.use();
 
 var timestamp = moment().add(1, 'm');
 
@@ -21,7 +22,6 @@ gpio4.on("change", function(val) {
       var now = moment()
       if (now > timestamp) {
         console.log("turning on screen")
-        responsiveVoice.speak("Hello, I am Jarvis. Welcome to Cardinal Solutions Group.", "UK English Male");
         const child = exec('xset s reset && xset dpms force on',
           (error, stdout, stderr) => {
             console.log(`stdout: ${stdout}`);
@@ -30,6 +30,13 @@ gpio4.on("change", function(val) {
               console.log(`exec error: ${error}`);
             }
         });
+
+        console.log("checking proximity")
+        proximity.getDistance(function(err, distance) {
+          if (err) throw err;
+          console.log("Distance: ", distance, "cm away.");
+        });
+
       }
     } else {
       timestamp = moment().add(1, 'm');
