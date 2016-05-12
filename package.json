@@ -90,7 +90,6 @@
     "gpio": "^0.2.7",
     "material-ui": "^0.14.4",
     "moment": "^2.13.0",
-    "proximity-hcsr04": "^0.1.0",
     "raspicam-js": "^0.3.12",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
