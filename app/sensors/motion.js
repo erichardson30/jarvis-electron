@@ -29,10 +29,7 @@ gpio4.on("change", function(val) {
         });
 
         console.log("checking proximity")
-        proximity.getDistance(function(err, distance) {
-          if (err) throw err;
-          console.log("Distance: ", distance, "cm away.");
-        });
+        proximity.getDistance();
       }
 
     } else {

@@ -21,8 +21,9 @@ function trigger() {
   }.bind(this), 10);
 }
 
-function getDistance(callback) {
+function getDistance() {
 
+  console.log("getting distance inside proximity")
   var pulseStart = new Date();
   var pulseEnd = new Date();
 
@@ -43,9 +44,6 @@ function getDistance(callback) {
     let centimeters = Math.round(distance * 100) / 100;
     console.log("centimeters: " + centimeters)
 
-    if (callback) {
-      callback(null, distance);
-    }
   }, 10);
 };
 
