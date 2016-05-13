@@ -39,7 +39,6 @@ function getDistance(callback) {
     }
 
     let duration = pulseEnd - pulseStart;
-    let duration = pulseEnd - pulseStart;
     let distance = duration * 17150;
     let centimeters = Math.round(distance * 100) / 100;
     console.log("centimeters: " + centimeters)
