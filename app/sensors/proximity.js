@@ -4,22 +4,20 @@ var util = require('util');
 var gpio = require("gpio");
 
 // pin 38 GPIO 20 - for trigger
-let trigger = gpio.export(38, {
+var trig = gpio.export(38, {
    direction: "out",
    ready: function() {
    }
 });
 
 // pin 37 GPIO 26 - for echo
-let echo = gpio.export(37, {
+var echo = gpio.export(37, {
    direction: "in",
    ready: function() {
    }
 });
 
-function Proximity(trigger, echo, callback) {
-  this.trigger = trigger;
-  this.echo = echo;
+function Proximity(callback) {
 
   setImmediate(function ready() {
     this.emit('ready');
@@ -28,16 +26,15 @@ function Proximity(trigger, echo, callback) {
   if (callback) {
     callback(null, this);
   }
-
   return this;
 }
 
 util.inherits(Proximity, events.EventEmitter);
 
 Proximity.prototype.triggerRead = function() {
-  this.trigger.write(1);
+  this.trig.write(1);
   setTimeout(function off() {
-    this.trigger.write(0);
+    this.trig.write(0);
   }.bind(this), 10);
 }
 
