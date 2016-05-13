@@ -18,7 +18,6 @@ var echo = gpio.export(37, {
 });
 
 function Proximity(callback) {
-
   setImmediate(function ready() {
     this.emit('ready');
   }.bind(this));
@@ -31,35 +30,35 @@ function Proximity(callback) {
 
 util.inherits(Proximity, events.EventEmitter);
 
-Proximity.prototype.triggerRead = function() {
-  this.trig.write(1);
+Proximity.prototype.trigger = function() {
+  this.trig.set(1);
   setTimeout(function off() {
-    this.trig.write(0);
+    this.trig.set(0);
   }.bind(this), 10);
 }
 
 Proximity.prototype.getDistance = function(callback) {
-  this.triggerRead(trig);
-  this.echo.readPulse('high', 1000, function(err, duration) {
 
-    if (err) {
-      if (callback) {
-        callback(err);
-      }
-      return;
-    }
+  var pulseStart = Date.now();
+  var pulseEnd = Date.now();
+  this.trigger(trig);
+  while(this.echo.value == 0) {
+    pulseStart = Date.now();
+  }
 
-    var distance = ((duration * 1000)/2) / 29.1;
+  while(this.echo.value == 1) {
+    pulseEnd = Date.now();
+  }
 
-    setImmediate(function() {
-      this.emit('data', distance);
-    }.bind(this));
-
-    if (callback) {
-      callback(null, distance);
-    }
-  }.bind(this));
-}
+  let duration = pulseEnd - pulseStart;
+  let distance = duration * 17150;
+  let centimeters = Math.round(distance * 100) / 100;
+  console.log("centimeters: " + centimeters);
+  var distance = ((duration * 1000)/2) / 29.1;
+  if (callback) {
+    callback(null, distance);
+  }
+}.bind(this));
 
 function use(callback) {
   return new Proximity(callback);
