@@ -19,7 +19,11 @@ gpio4.on("change", function(val) {
     // value will report either 1 or 0 (number) when the value changes
     console.log(val)
     if (val == 1) {
-      var now = moment()
+      let now = moment()
+
+      console.log("now: " + now)
+      console.log("timestamp: " + timestamp)
+
       if (now > timestamp) {
         console.log("turning on screen")
         const child = exec('xset s reset && xset dpms force on',
@@ -30,14 +34,14 @@ gpio4.on("change", function(val) {
               console.log(`exec error: ${error}`);
             }
         });
-
-        console.log("checking proximity")
-        proximity.getDistance(function(err, distance) {
-          if (err) throw err;
-          console.log("Distance: ", distance, "cm away.");
-        });
-
       }
+
+      console.log("checking proximity")
+      proximity.getDistance(function(err, distance) {
+        if (err) throw err;
+        console.log("Distance: ", distance, "cm away.");
+      });
+
     } else {
       timestamp = moment().add(1, 'm');
     }
