@@ -23,22 +23,22 @@ function trigger() {
 
 function getDistance(callback) {
 
-  var pulseStart = Date.now();
-  var pulseEnd = Date.now();
+  var pulseStart = new Date();
+  var pulseEnd = new Date();
 
   this.trig.set(1);
   setTimeout(function off() {
     this.trig.set(0);
 
     while(this.echo.value == 0) {
-      pulseStart = Date.now();
+      pulseStart = new Date();
     }
 
     while(this.echo.value == 1) {
-      pulseEnd = Date.now();
+      pulseEnd = new Date();
     }
 
-    let duration = pulseEnd - pulseStart;
+    let duration = pulseEnd.getTime() - pulseStart.getTime();
     let distance = duration * 17150;
     let centimeters = Math.round(distance * 100) / 100;
     console.log("centimeters: " + centimeters)

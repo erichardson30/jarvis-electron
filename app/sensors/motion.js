@@ -8,9 +8,7 @@ var gpio4 = gpio.export(4, {
    ready: function() {
    }
 });
-var proximityLib = require('./proximity');
-var proximity = proximityLib.use();
-
+var proximity = require('./proximity');
 var timestamp = moment().add(1, 'm');
 
 // bind to the "change" event
