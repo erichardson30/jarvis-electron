@@ -47,4 +47,4 @@ function getDistance() {
   }, 10);
 };
 
-module.exports.getDistance - getDistance;
+module.exports.getDistance = getDistance;
