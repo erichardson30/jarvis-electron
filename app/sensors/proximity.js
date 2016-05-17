@@ -23,7 +23,7 @@ function trigger() {
 
 function getDistance() {
 
-  console.log("getting distance inside proximity 1")
+  console.log("getting distance inside proximity 1");
   var pulseStart = new Date();
   var pulseEnd = new Date();
 
@@ -42,7 +42,7 @@ function getDistance() {
     let duration = pulseEnd.getTime() - pulseStart.getTime();
     let distance = duration * 17150;
     let centimeters = Math.round(distance * 100) / 100;
-    console.log("centimeters: " + centimeters)
+    console.log("centimeters: " + centimeters);
 
   }, 10);
 };
