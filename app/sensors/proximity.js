@@ -14,31 +14,24 @@ let echo = gpio.export(37, {
    }
 });
 
-function trigger() {
-  this.trig.set(1);
-  setTimeout(function off() {
-    this.trig.set(0);
-  }.bind(this), 10);
-}
-
 function getDistance() {
 
   console.log("getting distance inside proximity 1");
   var pulseStart = new Date();
   var pulseEnd = new Date();
 
-  trig.set(function() {
+  this.trig.set(function() {
     console.log("trig 1 value: ")
     console.log(trig.value);    // should log 1
 
     setTimeout(function off() {
-      trig.reset();
+      this.trig.reset();
 
-      while(echo.value == 0) {
+      while(this.echo.value == 0) {
         pulseStart = new Date();
       }
 
-      while(echo.value == 1) {
+      while(this.echo.value == 1) {
         pulseEnd = new Date();
       }
 
