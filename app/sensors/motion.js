@@ -18,7 +18,9 @@ gpio4.on("change", function(val) {
     console.log(val)
     if (val == 1) {
 
+      console.log("checking if should turn on")
       let now = moment()
+      
       if (now > timestamp) {
         console.log("turning on screen")
         const child = exec('xset s reset && xset dpms force on',

@@ -23,7 +23,7 @@ function trigger() {
 
 function getDistance() {
 
-  console.log("getting distance inside proximity")
+  console.log("getting distance inside proximity 1")
   var pulseStart = new Date();
   var pulseEnd = new Date();
 
