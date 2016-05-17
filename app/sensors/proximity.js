@@ -20,7 +20,7 @@ function getDistance() {
 
   var pulseStart = new Date();
   var pulseEnd = new Date();
-  
+
   trig.set(function() {
     console.log("trig 1 value: ")
     console.log(trig.value);    // should log 1
@@ -47,4 +47,4 @@ function getDistance() {
 
 };
 
-module.exports.getDistance = getDistance;
+module.exports = getDistance;
