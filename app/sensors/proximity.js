@@ -1,6 +1,6 @@
 var gpio = require("gpio");
 
-function getDistance() {
+var getDistance = function() { {
 
   console.log("getting distance inside proximity 1");
 
@@ -44,7 +44,7 @@ function getDistance() {
     }, 10);
 
   });
-  
+
 };
 
 module.exports = getDistance;
