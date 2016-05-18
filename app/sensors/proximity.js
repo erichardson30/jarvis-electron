@@ -27,12 +27,12 @@ var getDistance = function() {
       trig.set(0, function() {
 
         console.log("trig value - expecting 0: " + trig.value);
-        console.log("echo value 0 - ": echo.value);
+        console.log("echo value point 0: " + echo.value);
         while(echo.value == 0) {
           pulseStart = new Date();
         }
 
-        console.log("echo value 1 - ": echo.value);
+        console.log("echo value point 1:" + echo.value);
         while(echo.value == 1) {
           pulseEnd = new Date();
         }
