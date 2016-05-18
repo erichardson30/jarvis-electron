@@ -16,7 +16,7 @@ let echo = gpio.export(37, {
 
 var getDistance = function() {
 
-  console.log("checking distance");
+  console.log("inside getDistance");
   var pulseStart = new Date();
   var pulseEnd = new Date();
 
@@ -44,7 +44,6 @@ var getDistance = function() {
     }, 10);
 
   });
-
 };
 
 module.exports = {

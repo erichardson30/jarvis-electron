@@ -25,6 +25,8 @@ gpio4.on("change", function(val) {
               console.log(`exec error: ${error}`);
             }
         });
+
+        console.log("checking distance");
         proximity.getDistance();
       }
 
