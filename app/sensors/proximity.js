@@ -24,23 +24,25 @@ var getDistance = function() {
 
     console.log("trig value - expecting 1: " + trig.value)
 
-    setTimeout(function off() {
+    setTimeout(function() {
 
-      trig.reset();
-      console.log("trig value - expecting 0: " + trig.value)
+      trig.set(0, function() {
 
-      while(echo.value == 0) {
-        pulseStart = new Date();
-      }
+        console.log("trig value - expecting 0: " + trig.value)
 
-      while(echo.value == 1) {
-        pulseEnd = new Date();
-      }
+        while(echo.value == 0) {
+          pulseStart = new Date();
+        }
 
-      let duration = pulseEnd.getTime() - pulseStart.getTime();
-      let distance = duration * 17150;
-      let centimeters = Math.round(distance * 100) / 100;
-      console.log("centimeters: " + centimeters);
+        while(echo.value == 1) {
+          pulseEnd = new Date();
+        }
+
+        let duration = pulseEnd.getTime() - pulseStart.getTime();
+        let distance = duration * 17150;
+        let centimeters = Math.round(distance * 100) / 100;
+        console.log("centimeters: " + centimeters);
+      });
 
     }, 10);
 
