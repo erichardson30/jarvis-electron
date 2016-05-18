@@ -22,11 +22,12 @@ var getDistance = function() {
 
   trig.set(function() {
 
-    console.log("trig 1 value: ")
-    console.log(trig.value);    // should log 1
+    console.log("trig value - expecting 1: " + trig.value)
 
     setTimeout(function off() {
+
       trig.reset();
+      console.log("trig value - expecting 0: " + trig.value)
 
       while(echo.value == 0) {
         pulseStart = new Date();
