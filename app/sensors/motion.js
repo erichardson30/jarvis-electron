@@ -32,7 +32,7 @@ gpio4.on("change", function(val) {
         });
 
         console.log("checking proximity");
-        proximity.getDistance();
+        this.proximity.getDistance();
       }
 
     } else {
