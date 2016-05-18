@@ -47,4 +47,6 @@ var getDistance = function() { {
 
 };
 
-module.exports = getDistance;
+module.exports = {
+  getDistance: getDistance
+};
