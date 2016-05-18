@@ -8,6 +8,7 @@ var gpio4 = gpio.export(4, {
    ready: function() {
    }
 });
+
 var proximity = require('./proximity');
 var timestamp = moment().add(1, 'm');
 
