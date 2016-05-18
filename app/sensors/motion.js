@@ -16,23 +16,15 @@ var timestamp = moment().add(1, 'm');
 gpio4.on("change", function(val) {
 
     // value will report either 1 or 0 (number) when the value changes
-    console.log(val);
     if (val == 1) {
-
-      console.log("checking if should turn on");
       let now = moment();
-
       if (now.isAfter(timestamp)) {
-
-        console.log("turning on screen");
         const child = exec('xset s reset && xset dpms force on',
           (error, stdout, stderr) => {
             if (error !== null) {
               console.log(`exec error: ${error}`);
             }
         });
-
-        console.log("checking proximity");
         proximity.getDistance();
       }
 
