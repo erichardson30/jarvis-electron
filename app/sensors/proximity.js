@@ -28,15 +28,19 @@ var getDistance = function() {
 
         console.log("trig value - expecting 0: " + trig.value);
         console.log("echo value point 0: " + echo.value);
+
         while(echo.value == 0) {
           pulseStart = new Date();
-          console.log("echo value 0 new date: " + pulseStart);          
+          console.log("pulse start date: " + pulseStart);
         }
 
-        console.log("echo value point 1:" + echo.value);
+        console.log("echo value point 1: " + echo.value);
         while(echo.value == 1) {
           pulseEnd = new Date();
+          console.log("pulse end date: " + pulseEnd);
         }
+
+        console.log("echo value point 2: " + echo.value);
 
         let duration = pulseEnd.getTime() - pulseStart.getTime();
         let distance = duration * 17150;
