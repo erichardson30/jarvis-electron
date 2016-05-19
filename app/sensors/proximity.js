@@ -26,6 +26,7 @@ var getDistance = function() {
     trig.set(function() {
 
       console.log("set trigger");
+      console.log("trig value - expecting 1: " + trig.value);
       setTimeout(function() {
 
         trig.set(0, function() {
@@ -42,6 +43,7 @@ var getDistance = function() {
           console.log("echo value point 2: " + echo.value);
 
           let duration = pulseEnd.getTime() - pulseStart.getTime();
+          console.log("duration: " + duration);
           let distance = duration * 17150;
           let centimeters = Math.round(distance * 100) / 100;
           console.log("centimeters: " + centimeters);
