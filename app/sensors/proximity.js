@@ -48,6 +48,7 @@ var getDistance = function() {
               console.log("duration: " + duration);
 
               if (duration < 200000) {
+                console.log("jarvis welcome")
                 responsiveVoice.speak("Hello I am Jarvis welcome to Cardional Solutions. Please check in", "UK English Male", {rate: 0.8});
               }
 
