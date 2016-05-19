@@ -31,13 +31,11 @@ var getDistance = function() {
 
         while(echo.value == 0) {
           pulseStart = new Date();
-          console.log("pulse start date: " + pulseStart);
         }
 
         console.log("echo value point 1: " + echo.value);
         while(echo.value == 1) {
           pulseEnd = new Date();
-          console.log("pulse end date: " + pulseEnd);
         }
 
         console.log("echo value point 2: " + echo.value);
