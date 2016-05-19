@@ -17,37 +17,38 @@ let echo = gpio.export(37, {
 var getDistance = function() {
 
   console.log("inside getDistance");
-  var pulseStart = new Date();
-  var pulseEnd = new Date();
-
   trig.set(function() {
 
-    setTimeout(function() {
+    console.log("reset trigger 1");
+    var pulseStart = new Date();
+    var pulseEnd = new Date();
 
-      trig.set(0, function() {
+    trig.set(function() {
 
-        console.log("trig value - expecting 0: " + trig.value);
-        console.log("echo value point 0: " + echo.value);
+      console.log("set trigger");
+      setTimeout(function() {
 
-        while(echo.value == 0) {
-          pulseStart = new Date();
-        }
+        trig.set(0, function() {
 
-        console.log("echo value point 1: " + echo.value);
-        while(echo.value == 1) {
-          pulseEnd = new Date();
-        }
+          console.log("reset trigger 2");
+          console.log("trig value - expecting 0: " + trig.value);
+          console.log("echo value point 0: " + echo.value);
 
-        console.log("echo value point 2: " + echo.value);
+          console.log("echo value point 1: " + echo.value);
+          while(echo.value == 1) {
+            pulseEnd = new Date();
+          }
 
-        let duration = pulseEnd.getTime() - pulseStart.getTime();
-        let distance = duration * 17150;
-        let centimeters = Math.round(distance * 100) / 100;
-        console.log("centimeters: " + centimeters);
-      });
+          console.log("echo value point 2: " + echo.value);
 
-    }, 10);
+          let duration = pulseEnd.getTime() - pulseStart.getTime();
+          let distance = duration * 17150;
+          let centimeters = Math.round(distance * 100) / 100;
+          console.log("centimeters: " + centimeters);
+        });
 
+      }, 10);
+    });
   });
 };
 
