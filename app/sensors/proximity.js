@@ -35,18 +35,27 @@ var getDistance = function() {
           console.log("trig value - expecting 0: " + trig.value);
           console.log("echo value point 0: " + echo.value);
 
-          console.log("echo value point 1: " + echo.value);
-          while(echo.value == 1) {
-            pulseEnd = new Date();
-          }
+          echo.on("change", function(val) {
 
-          console.log("echo value point 2: " + echo.value);
+            console.log("change value: " + val)
+            if (val = 1) {
 
-          let duration = pulseEnd.getTime() - pulseStart.getTime();
-          console.log("duration: " + duration);
-          let distance = duration * 17150;
-          let centimeters = Math.round(distance * 100) / 100;
-          console.log("centimeters: " + centimeters);
+              pulseEnd = new Date();
+              console.log("echo value point 2: " + echo.value);
+
+              let duration = pulseEnd.getTime() - pulseStart.getTime();
+              console.log("duration: " + duration);
+              let distance = duration * 17150;
+              let centimeters = Math.round(distance * 100) / 100;
+              console.log("centimeters: " + centimeters);
+
+            } else {
+
+              console.log("nothing")
+              pulseStart = new Date();
+            }
+
+          });
         });
 
       }, 10);
