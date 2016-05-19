@@ -40,13 +40,19 @@ var getDistance = function() {
             console.log("change value: " + val)
             if (val = 1) {
 
+              responsiveVoice.speak(" ");
               pulseEnd = new Date();
               console.log("echo value point 2: " + echo.value);
 
               let duration = pulseEnd.getTime() - pulseStart.getTime();
               console.log("duration: " + duration);
+
+              if (duration < 200000) {
+                responsiveVoice.speak("Hello I am Jarvis welcome to Cardional Solutions. Please check in", "UK English Male", {rate: 0.8});
+              }
+
               let distance = duration * 17150;
-              let centimeters = Math.round(distance * 100) / 100;
+              let centimeters = Math.round(duration * 100) / 100;
               console.log("centimeters: " + centimeters);
 
             } else {
