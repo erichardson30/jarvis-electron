@@ -46,12 +46,12 @@ export default class Home extends Component {
 
   notifyManager = () => {
 
-    console.log("notifying mangaer")
+    console.log("notifying channel")
     responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
     this.closeModal();
     // need to create proper data object for office manager // jeff
     let data = {
-      firstName: "jeff"
+      firstName: "channel"
     };
     Camera.takePicture(data);
   }
