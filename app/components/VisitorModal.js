@@ -15,7 +15,7 @@ export default class VisitorModal extends Component {
     if(data.expecting) {
       this.props.notifyEmployee(data);
     } else {
-      this.props.notifyManager();
+      this.props.notifyGroup();
     }
   }
     

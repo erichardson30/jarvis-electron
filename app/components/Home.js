@@ -88,7 +88,7 @@ export default class Home extends Component {
             close = {this.closeModal}
             visitors = {this.state.visitors}
             notifyEmployee = {this.notifyEmployee}
-            notifyManager = {this.notifyManager} />
+            notifyGroup = {this.notifyGroup} />
         </div>
       </div>
     );
