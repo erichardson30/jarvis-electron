@@ -27,14 +27,12 @@ camera.on("exit", function(timestamp) {
     console.log("notify employee: " + data.firstName);
     // let message = data.firstName + ', someone is here to see you at the front'
     fs.readFile('./image.jpg', function(err, buf) {
-      socket.emit('checkIn', { image: true, buffer: buf.toString('base64'), data: data });
-    //   socket.emit('notifyBot', message, function (err) {
-    //     if (err) {
-    //       return console.error("Socket error" + err);
-    //     }
-    //   });
-    })
-
+        if(data.checkIn) {
+            socket.emit('newCheckIn', { image: true, buffer: buf.toString('base64'), data: data });
+        } else {
+            socket.emit('checkIn', { image: true, buffer: buf.toString('base64'), data: data });
+        }
+    });
 });
 
 function takePicture(userData) {
