@@ -1,50 +1,75 @@
 var gpio = require("gpio");
 
-function getDistance() {
+// pin 38 GPIO 20 - for trigger
+let trig = gpio.export(38, {
+   direction: "out",
+   ready: function() {
+   }
+});
 
-  console.log("getting distance inside proximity 1");
+// pin 37 GPIO 26 - for echo
+let echo = gpio.export(37, {
+   direction: "in",
+   ready: function() {
+   }
+});
 
-  // pin 38 GPIO 20 - for trigger
-  let trig = gpio.export(38, {
-     direction: "out",
-     ready: function() {
-     }
-  });
+var getDistance = function() {
 
-  // pin 37 GPIO 26 - for echo
-  let echo = gpio.export(37, {
-     direction: "in",
-     ready: function() {
-     }
-  });
-
-  var pulseStart = new Date();
-  var pulseEnd = new Date();
-  
+  console.log("inside getDistance");
   trig.set(function() {
-    console.log("trig 1 value: ")
-    console.log(trig.value);    // should log 1
 
-    setTimeout(function off() {
-      trig.reset();
+    console.log("reset trigger 1");
+    var pulseStart = new Date();
+    var pulseEnd = new Date();
 
-      while(this.echo.value == 0) {
-        pulseStart = new Date();
-      }
+    trig.set(function() {
 
-      while(this.echo.value == 1) {
-        pulseEnd = new Date();
-      }
+      console.log("set trigger");
+      console.log("trig value - expecting 1: " + trig.value);
+      setTimeout(function() {
 
-      let duration = pulseEnd.getTime() - pulseStart.getTime();
-      let distance = duration * 17150;
-      let centimeters = Math.round(distance * 100) / 100;
-      console.log("centimeters: " + centimeters);
+        trig.set(0, function() {
 
-    }, 10);
+          console.log("reset trigger 2");
+          console.log("trig value - expecting 0: " + trig.value);
+          console.log("echo value point 0: " + echo.value);
 
+          echo.on("change", function(val) {
+
+            console.log("change value: " + val)
+            if (val = 1) {
+
+              responsiveVoice.speak(" ");
+              pulseEnd = new Date();
+              console.log("echo value point 2: " + echo.value);
+
+              let duration = pulseEnd.getTime() - pulseStart.getTime();
+              console.log("duration: " + duration);
+
+              if (duration < 200000) {
+                console.log("jarvis welcome")
+                responsiveVoice.speak("Hello I am Jarvis welcome to Cardional Solutions. Please check in", "UK English Male", {rate: 0.8});
+              }
+
+              let distance = duration * 17150;
+              let centimeters = Math.round(duration * 100) / 100;
+              console.log("centimeters: " + centimeters);
+
+            } else {
+
+              console.log("nothing")
+              pulseStart = new Date();
+            }
+
+          });
+        });
+
+      }, 10);
+    });
   });
-
 };
 
-module.exports.getDistance = getDistance;
+module.exports = {
+  getDistance : getDistance
+};

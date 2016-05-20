@@ -47,6 +47,7 @@ export default class Home extends Component {
   notifyGroup = () => {
 
     console.log("notifying slack channel")
+
     responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
     this.closeModal();
     let data = {
