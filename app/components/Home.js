@@ -39,19 +39,23 @@ export default class Home extends Component {
           modalIsOpen: true
         });
       } else {
-        self.notifyManager();
+        self.notifyGroup();
       }
     });
   }
 
-  notifyManager = () => {
+  notifyGroup = () => {
 
-    console.log("notifying mangaer")
+    console.log("notifying slack channel")
     responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
     this.closeModal();
-    // need to create proper data object for office manager // jeff
     let data = {
-      firstName: "jeff"
+      firstName: 'Cardinal - RDU',
+      channel: 'C17MD45N2',
+      expecting: 'A visitor',
+      date: new Date(),
+      checkedIn : true,
+      checkedInDate : new Date()
     };
     Camera.takePicture(data);
   }
