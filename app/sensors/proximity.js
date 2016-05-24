@@ -25,22 +25,25 @@ var getDistance = function() {
 
   while(now.isBefore(timestamp) && monitor) {
 
-    console.log("monitoring change")
+    console.log("monitoring change");
 
     trig.set(0, function() {
 
-      console.log("trig set off 1 ")
+      console.log("trig set off 1 ");
       var pulseStart = moment().millisecond();
       var pulseEnd = moment().millisecond();
 
       trig.set(function() {
 
-        console.log("trig set on after 10 millisecond")
+        console.log("trig set on");
+
         setTimeout(function() {
+
+          console.log("10 milliseconds");
 
           trig.set(0, function() {
 
-            console.log("trig set off 2")
+            console.log("trig set off 2");
 
               echo.on("change", function(val) {
 
@@ -53,7 +56,7 @@ var getDistance = function() {
                   console.log("duration: " + duration);
 
                   if (duration < 300000) {
-                    console.log("jarvis welcome")
+                    console.log("jarvis welcome");
                     responsiveVoice.speak("Hello I am Jarvis, welcome to Cardinal Solutions. Please check in", "UK English Male", {rate: 0.8});
                     monitor = false
                   }
@@ -63,13 +66,16 @@ var getDistance = function() {
                   console.log("centimeters: " + centimeters);
                 }
               });
+
+
           });
+
         }, 10);
       });
     });
   }
 
-  console.log("out of while loop")
+  console.log("out of while loop");
   trig.reset();
   echo.reset();
 };
