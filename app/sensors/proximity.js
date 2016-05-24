@@ -52,7 +52,8 @@ var getDistance = function() {
 
       });
 
-    }, 50);
+    }, 500);
+    now = moment();
   }
 
   console.log("out of while loop");
