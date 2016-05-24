@@ -37,46 +37,23 @@ var getDistance = function() {
         trig.set(function() {
 
           console.log("trig set on");
-
           setTimeout(function() {
-
-            console.log("10 milliseconds");
 
             trig.set(0, function() {
 
               console.log("trig set off 2");
-
-                echo.on("change", function(val) {
-
-                  console.log("on change")
-                  if (val = 1) {
-
-                    responsiveVoice.speak(" ");
-                    pulseEnd = new Date();
-                    let duration = pulseEnd - pulseStart;
-                    console.log("duration: " + duration);
-
-                    if (duration < 300000) {
-                      console.log("jarvis welcome");
-                      responsiveVoice.speak("Hello I am Jarvis, welcome to Cardinal Solutions. Please check in", "UK English Male", {rate: 0.8});
-                      monitor = false
-                    }
-
-                    let distance = duration * 17150;
-                    let centimeters = Math.round(duration * 100) / 100;
-                    console.log("centimeters: " + centimeters);
-                  }
-                });
+              // on change
 
             });
 
           }, 10);
+
         });
+
       });
 
     }, 50);
   }
-}
 
   console.log("out of while loop");
   trig.reset();
