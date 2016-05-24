@@ -20,7 +20,7 @@ let echo = gpio.export(37, {
 var getDistance = function() {
 
   var monitor = true;
-  var timestamp = moment().add(30, 's');
+  var timestamp = moment().add(20, 's');
   var now = moment();
 
   while(now.isBefore(timestamp) && monitor) {
@@ -45,28 +45,27 @@ var getDistance = function() {
 
             console.log("trig set off 2");
 
-              echo.on("change", function(val) {
-
-                console.log("on change")
-                if (val = 1) {
-
-                  responsiveVoice.speak(" ");
-                  pulseEnd = new Date();
-                  let duration = pulseEnd - pulseStart;
-                  console.log("duration: " + duration);
-
-                  if (duration < 300000) {
-                    console.log("jarvis welcome");
-                    responsiveVoice.speak("Hello I am Jarvis, welcome to Cardinal Solutions. Please check in", "UK English Male", {rate: 0.8});
-                    monitor = false
-                  }
-
-                  let distance = duration * 17150;
-                  let centimeters = Math.round(duration * 100) / 100;
-                  console.log("centimeters: " + centimeters);
-                }
-              });
-
+              // echo.on("change", function(val) {
+              //
+              //   console.log("on change")
+              //   if (val = 1) {
+              //
+              //     responsiveVoice.speak(" ");
+              //     pulseEnd = new Date();
+              //     let duration = pulseEnd - pulseStart;
+              //     console.log("duration: " + duration);
+              //
+              //     if (duration < 300000) {
+              //       console.log("jarvis welcome");
+              //       responsiveVoice.speak("Hello I am Jarvis, welcome to Cardinal Solutions. Please check in", "UK English Male", {rate: 0.8});
+              //       monitor = false
+              //     }
+              //
+              //     let distance = duration * 17150;
+              //     let centimeters = Math.round(duration * 100) / 100;
+              //     console.log("centimeters: " + centimeters);
+              //   }
+              // });
 
           });
 
