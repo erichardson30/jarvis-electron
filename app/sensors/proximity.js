@@ -19,52 +19,49 @@ let echo = gpio.export(37, {
 
 var getDistance = function() {
 
-  trig.set(function() {
+  var monitor = true;
+  var timestamp = moment().add(30, 's');
+  var now = moment();
 
-    var timestamp = moment().add(30, 's');
-    var pulseStart = moment().millisecond();
-    var pulseEnd = moment().millisecond();
-    var timestamp = moment().add(1, 'm');
-
+  while(now.isBefore(timestamp) && monitor) {
     trig.set(function() {
-      setTimeout(function() {
-        trig.set(0, function() {
+      var pulseStart = moment().millisecond();
+      var pulseEnd = moment().millisecond();
+      trig.set(function() {
+        setTimeout(function() {
+          trig.set(0, function() {
 
-          let monitor = true;
-          let now = moment();
+              console.log("monitoring change")
+              echo.on("change", function(val) {
+                if (val = 1) {
 
-          // monitoring while loop
-          while(now.isBefore(timestamp) && monitor) {
-            echo.on("change", function(val) {
-              if (val = 1) {
+                  responsiveVoice.speak(" ");
+                  pulseEnd = new Date();
+                  let duration = pulseEnd - pulseStart;
+                  console.log("duration: " + duration);
 
-                responsiveVoice.speak(" ");
-                pulseEnd = new Date();
-                let duration = pulseEnd.getTime() - pulseStart.getTime();
-                console.log("duration: " + duration);
+                  if (duration < 300000) {
+                    console.log("jarvis welcome")
+                    responsiveVoice.speak("Hello I am Jarvis, welcome to Cardinal Solutions. Please check in", "UK English Male", {rate: 0.8});
+                    monitor = false
+                  }
 
-                if (duration < 300000) {
-                  console.log("jarvis welcome")
-                  responsiveVoice.speak("Hello I am Jarvis, welcome to Cardinal Solutions. Please check in", "UK English Male", {rate: 0.8});
-                  monitor = false
+                  let distance = duration * 17150;
+                  let centimeters = Math.round(duration * 100) / 100;
+                  console.log("centimeters: " + centimeters);
+                } else {
+                  var now = moment();
                 }
-
-                let distance = duration * 17150;
-                let centimeters = Math.round(duration * 100) / 100;
-                console.log("centimeters: " + centimeters);
-              }
-            });
-          }
-
-          console.log("out of while loop")
-          trig.reset();
-          echo.reset();
-
-        });
-      }, 10);
-
+              });
+          });
+        }, 10);
+      });
     });
-  });
+  }
+
+  console.log("out of while loop")
+  trig.reset();
+  echo.reset();
 };
 
 module.exports = {
