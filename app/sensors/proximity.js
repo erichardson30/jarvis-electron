@@ -24,15 +24,27 @@ var getDistance = function() {
   var now = moment();
 
   while(now.isBefore(timestamp) && monitor) {
-    trig.set(function() {
+
+    console.log("monitoring change")
+
+    trig.set(0, function() {
+
+      console.log("trig set off 1 ")
       var pulseStart = moment().millisecond();
       var pulseEnd = moment().millisecond();
+
       trig.set(function() {
+
+        console.log("trig set on after 10 millisecond")
         setTimeout(function() {
+
           trig.set(0, function() {
 
-              console.log("monitoring change")
+            console.log("trig set off 2")
+
               echo.on("change", function(val) {
+
+                console.log("on change")
                 if (val = 1) {
 
                   responsiveVoice.speak(" ");
@@ -49,8 +61,6 @@ var getDistance = function() {
                   let distance = duration * 17150;
                   let centimeters = Math.round(duration * 100) / 100;
                   console.log("centimeters: " + centimeters);
-                } else {
-                  var now = moment();
                 }
               });
           });
