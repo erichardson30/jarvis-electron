@@ -45,7 +45,7 @@ var getDistance = function() {
 
         });
       }, 15);
-      
+
     });
 
     setTimeout(function () {
@@ -63,6 +63,7 @@ var getDistance = function() {
     echo.reset();
   }
 
+  monitorWithTimeout();
 };
 
 module.exports = {
