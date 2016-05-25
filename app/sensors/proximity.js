@@ -41,29 +41,15 @@ var getDistance = function() {
         trig.set(0, function() {
            console.log("2 trig value (0): " + trig.value) // should be 0
 
-]        // on change
-          echo.on("change", function(val) {
-            console.log("on change")
-            if (val = 1) {
+           // on change
+           echo.on("change", function(val) {
 
-              responsiveVoice.speak(" ");
-              var pulseEnd = moment().millisecond();
-              let duration = pulseEnd - pulseStart;
-              console.log("duration: " + duration);
+             console.log("on change val: " + val)
 
-              if (duration < 300000) {
-                console.log("jarvis welcome");
-                responsiveVoice.speak("Hello I am Jarvis, welcome to Cardinal Solutions. Please check in", "UK English Male", {rate: 0.8});
-                monitor = false
-              }
-
-              let distance = duration * 17150;
-              let centimeters = Math.round(duration * 100) / 100;
-              console.log("centimeters: " + centimeters);
-            }
-          });
+           });
 
         });
+
       }, 15);
 
     });
