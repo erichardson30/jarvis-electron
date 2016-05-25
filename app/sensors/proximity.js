@@ -21,7 +21,7 @@ var getDistance = function() {
 
   // resetting trigger
   trig.set(0);
-  console.log("initial trig value (0): " + trig.value) // should be 0
+  console.log("initial trig value (0): " + trig.value); // should be 0
 
   var monitor = true;
   var timestamp = moment().add(30, 's');
