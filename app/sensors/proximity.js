@@ -29,6 +29,7 @@ var getDistance = function() {
   // set up recursive loop
   function monitorWithTimeout() {
 
+    console.log("monitoring");
     var pulseStart = moment().millisecond();
 
     // trigger on, then off then  monitor on change
@@ -44,7 +45,9 @@ var getDistance = function() {
 
         });
       }, 15);
+      
     });
+
     setTimeout(function () {
 
       if (moment().isBefore(timestamp) && monitor) {
