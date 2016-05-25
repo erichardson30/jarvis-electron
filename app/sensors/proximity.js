@@ -56,6 +56,8 @@ var getDistance = function() {
 
     setTimeout(function () {
 
+      console.log("timeout");
+      echo.removeAllListeners('change');
       if (moment().isBefore(timestamp) && monitor) {
         monitorWithTimeout();
       };
