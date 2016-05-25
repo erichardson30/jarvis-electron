@@ -4,6 +4,7 @@ var moment = require("moment");
 // pin 38 GPIO 20 - for trigger
 let trig = gpio.export(38, {
    direction: "out",
+
    ready: function() {
    }
 });
@@ -11,6 +12,7 @@ let trig = gpio.export(38, {
 // pin 37 GPIO 26 - for echo
 let echo = gpio.export(37, {
    direction: "in",
+   interval: 500,
    ready: function() {
    }
 });
@@ -23,25 +25,26 @@ var getDistance = function() {
   var timestamp = moment().add(30, 's');
   var now = moment();
 
+  // resetting trigger
+  trig.set(0);
+  console.log("initial trig value (0): " + trig.value) // should be 0
+
   while(now.isBefore(timestamp) && monitor) {
 
     console.log("monitoring change");
-
     setTimeout(function() {
-      trig.set(0, function() {
 
-        console.log("trig set off 1 ");
         var pulseStart = moment().millisecond();
         var pulseEnd = moment().millisecond();
 
         trig.set(function() {
 
-          console.log("trig set on");
+          console.log("1 trig value (1): " + trig.value) // should be 1
           setTimeout(function() {
 
             trig.set(0, function() {
 
-              console.log("trig set off 2");
+              console.log("2 trig value (0): " + trig.value) // should be 0
               // on change
 
             });
@@ -50,9 +53,7 @@ var getDistance = function() {
 
         });
 
-      });
-
-    }, 500);
+    }, 1000);
     now = moment();
   }
 
