@@ -61,12 +61,6 @@ var getDistance = function() {
       };
 
     }, 1000);
-
-    // cleanup
-    console.log("cleanup");
-    echo.removeAllListeners('change');
-    trig.reset();
-    echo.reset();
   }
 
   monitorWithTimeout();
