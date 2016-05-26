@@ -40,12 +40,20 @@ var getDistance = function() {
         trig.set(0, function() {
            console.log("2 trig value (0): " + trig.value) // should be 0
 
-           // on change
-           echo.on("change", function(val) {
+           if (echo.value == 1) {
 
-             console.log("on change val: " + val)
+             var pulseEnd = moment().millisecond();
+             let duration = pulseEnd - pulseStart;
+             console.log("duration: " + duration);
 
-           });
+           }
+
+          //  // on change
+          //  echo.on("change", function(val) {
+           //
+          //    console.log("on change val: " + val)
+           //
+          //  });
 
         });
 
@@ -55,8 +63,8 @@ var getDistance = function() {
 
     setTimeout(function () {
 
-      console.log("timeout");
-      echo.removeAllListeners('change');
+      console.log("")
+      // echo.removeAllListeners('change');
       if (moment().isBefore(timestamp) && monitor) {
         monitorWithTimeout();
       };
