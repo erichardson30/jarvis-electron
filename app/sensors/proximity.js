@@ -22,6 +22,7 @@ var getDistance = function() {
   trig.set(0);
   console.log("initial trig value (0): " + trig.value); // should be 0
 
+  responsiveVoice.speak(" ");
   var monitor = true;
   var timestamp = moment().add(30, 's');
 
@@ -41,14 +42,14 @@ var getDistance = function() {
            console.log("2 trig value (0): " + trig.value) // should be 0
 
            console.log("echo value: " + echo.value)
+           while (echo.value == 0) {
+             moment().millisecond();
+           }
 
-           // on change
-           echo.on("change", function(val) {
-
-             console.log("on change val: " + val)
-
-           });
-
+           pulseEnd = new Date();
+           let duration = pulseEnd - pulseStart;
+           console.log("duration: " + duration);
+           
         });
 
       }, 15);
@@ -58,7 +59,7 @@ var getDistance = function() {
     setTimeout(function () {
 
       console.log("")
-      echo.removeAllListeners('change');
+      // echo.removeAllListeners('change');
       if (moment().isBefore(timestamp) && monitor) {
         monitorWithTimeout();
       };
