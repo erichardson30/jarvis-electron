@@ -63,7 +63,7 @@ var getDistance = function() {
         monitorWithTimeout();
       };
 
-    }, 1000);
+    }, 2000);
   }
 
   monitorWithTimeout();
