@@ -12,6 +12,7 @@ let trig = gpio.export(38, {
 // pin 37 GPIO 26 - for echo
 let echo = gpio.export(37, {
    direction: "in",
+   interval: 50,
    ready: function() {
    }
 });
@@ -43,13 +44,13 @@ var getDistance = function() {
 
            console.log("echo value: " + echo.value)
            while (echo.value == 0) {
-             moment().millisecond();
+             pulseStart = moment().millisecond();
            }
 
            pulseEnd = new Date();
            let duration = pulseEnd - pulseStart;
            console.log("duration: " + duration);
-           
+
         });
 
       }, 15);
