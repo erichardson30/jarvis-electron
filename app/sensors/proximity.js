@@ -43,14 +43,11 @@ var getDistance = function() {
            console.log("2 trig value (0): " + trig.value) // should be 0
 
            console.log("echo value: " + echo.value)
-           while (echo.value == 0) {
-             pulseStart = moment().millisecond();
-           }
+           echo.on("change", function(val) {
 
-           pulseEnd = new Date();
-           let duration = pulseEnd - pulseStart;
-           console.log("duration: " + duration);
+             console.log("on change")
 
+           });
         });
 
       }, 15);
