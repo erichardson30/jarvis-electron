@@ -12,6 +12,7 @@ const echo = gpio.export(37, {
 });
 
 function getDistance() {
+  const speedSound = 34000;
   // resetting trigger
   trig.set(0);
   setTimeout(500);
@@ -34,9 +35,18 @@ function getDistance() {
     while (echo.value === 1) {
       end = moment();
       console.log('Echo is 1');
+      let timeDiff = end.diff(start);
+      let distance = (timeDiff * speedSound) / 2;
+
+      console.log('Distance = ' + distance);
+
+      if (distance < 60) {
+        console.log('User is within 2 ft. Enable voice');
+        break;
+      }
     }
+    break;
   }
-  console.log('Start time = ' + start + ' End Time = ' + end);
   // set up recursive loop
   // function monitorWithTimeout() {
 
