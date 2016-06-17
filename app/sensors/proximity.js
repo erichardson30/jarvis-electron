@@ -29,6 +29,12 @@ function getDistance() {
   while (echo.value === 0) {
     start = new Date().getTime() / 1000;
     console.log('Echo is ' + echo.value);
+    trig.set(0);
+    setTimeout(function() {
+      trig.set();
+      setTimeout(10);
+      trig.set(0);
+    }, 500);
   }
 
   while (echo.value === 1) {
@@ -43,6 +49,8 @@ function getDistance() {
       console.log('User is within 2 ft. Enable voice');
       responsiveVoice.speak('Hello, I am Jarvis; welcome to Cardinal Solutions. Please check in.');
       return true;
+    } else {
+      return false;
     }
   }
   // set up recursive loop
