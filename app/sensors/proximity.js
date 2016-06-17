@@ -22,31 +22,28 @@ function getDistance() {
   let start = 0;
   let end = 0;
 
-  while (moment().isBefore(timestamp)) {
-    trig.set();
-    setTimeout(10);
-    trig.set(0);
+  trig.set();
+  setTimeout(10);
+  trig.set(0);
 
-    while (echo.value === 0) {
-      start = moment();
-      console.log('Echo is ' + echo.value);
+  while (echo.value === 0) {
+    start = moment();
+    console.log('Echo is ' + echo.value);
+  }
+
+  while (echo.value === 1) {
+    end = moment();
+    console.log('Echo is ' + echo.value);
+    let timeDiff = end.diff(start);
+    let distance = (timeDiff * speedSound) / 2;
+
+    console.log('Distance = ' + distance);
+
+    if (distance < 60) {
+      console.log('User is within 2 ft. Enable voice');
+      responsiveVoice.speak('Hello, I am Jarvis; welcome to Cardinal Solutions. Please check in.');
+      return true;
     }
-
-    while (echo.value === 1) {
-      end = moment();
-      console.log('Echo is ' + ehco.value);
-      let timeDiff = end.diff(start);
-      let distance = (timeDiff * speedSound) / 2;
-
-      console.log('Distance = ' + distance);
-
-      if (distance < 60) {
-        console.log('User is within 2 ft. Enable voice');
-        responsiveVoice.speak('Hello, I am Jarvis; welcome to Cardinal Solutions. Please check in.');
-        return true;
-      }
-    }
-    break;
   }
   // set up recursive loop
   // function monitorWithTimeout() {
