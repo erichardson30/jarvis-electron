@@ -29,12 +29,12 @@ function getDistance() {
 
     while (echo.value === 0) {
       start = moment();
-      console.log('Echo is 0');
+      console.log('Echo is ' + echo.value);
     }
 
     while (echo.value === 1) {
       end = moment();
-      console.log('Echo is 1');
+      console.log('Echo is ' + ehco.value);
       let timeDiff = end.diff(start);
       let distance = (timeDiff * speedSound) / 2;
 
@@ -43,7 +43,7 @@ function getDistance() {
       if (distance < 60) {
         console.log('User is within 2 ft. Enable voice');
         responsiveVoice.speak('Hello, I am Jarvis; welcome to Cardinal Solutions. Please check in.');
-        break;
+        return true;
       }
     }
     break;

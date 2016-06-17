@@ -21,6 +21,8 @@ gpio4.on("change", function(val) {
       });
 
       console.log("checking proximity");
-      proximity.getDistance();
+      if (proximity.getDistance()) {
+        setTimeout(3000);
+      }
     }
 });
