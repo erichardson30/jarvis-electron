@@ -27,14 +27,14 @@ function getDistance() {
   trig.set(0);
 
   while (echo.value === 0) {
-    start = moment();
+    start = new Date().getTime() / 1000;
     console.log('Echo is ' + echo.value);
   }
 
   while (echo.value === 1) {
-    end = moment();
+    end = new Date().getTime() / 1000;
     console.log('Echo is ' + echo.value);
-    let timeDiff = end.diff(start);
+    let timeDiff = end - start;
     let distance = (timeDiff * speedSound) / 2;
 
     console.log('Distance = ' + distance);
