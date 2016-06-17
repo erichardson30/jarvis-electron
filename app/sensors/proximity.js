@@ -42,6 +42,7 @@ function getDistance() {
 
       if (distance < 60) {
         console.log('User is within 2 ft. Enable voice');
+        responsiveVoice.speak('Hello, I am Jarvis; welcome to Cardinal Solutions. Please check in.');
         break;
       }
     }
