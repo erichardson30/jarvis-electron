@@ -27,11 +27,11 @@ function getDistance() {
     setTimeout(function() {
       console.log('turning off sensor');
       trig.set(0);
-      start = new Date().getTime / 1000;
+      start = new Date().getTime() / 1000;
       console.log('start time set to ' + start);
       if (echo.value === 0) {
         console.log('Echo is zero');
-        start = new Date().getTime / 1000;
+        start = new Date().getTime() / 1000;
         console.log('start time reset to ' + start);
       } else {
         console.log('Echo is ' + echo.value);
