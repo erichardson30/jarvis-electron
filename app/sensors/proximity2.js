@@ -10,13 +10,13 @@ const echo = gpio.export(37, {
   direction: 'in'
 });
 const speedSound = 34000;
-responsiveVoice.speak('');
 let start = 0;
 let end = 0;
 let timeDiff = 0;
 let distance = 0;
 
 function getDistance() {
+  responsiveVoice.speak('');
   // resetting trigger
   console.log('resetting trigger');
   trig.set(0);
