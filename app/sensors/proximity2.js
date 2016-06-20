@@ -25,28 +25,28 @@ function getDistance() {
     trig.set();
     setTimeout(function() {
       trig.set(0);
+      start = new Date().getTime / 1000;
+      if (echo.value === 0) {
+        console.log('Echo is zero');
+        start = new Date().getTime / 1000;
+      } else {
+        console.log('Echo is ' + echo.value);
+
+        end = new Date().getTime() / 1000;
+        timeDiff = end - start;
+        distance = (timeDiff * speedSound) / 2;
+
+        console.log('Distance = ' + distance);
+
+        if (distance < 60) {
+          console.log('User is within 2ft.');
+          return true;
+        }
+      }
+
+      setTimeout(getDistance, 500);
     }, 10);
   }, 500);
-
-  if (echo.value === 0) {
-    console.log('Echo is zero');
-    start = new Date().getTime / 1000;
-  } else {
-    console.log('Echo is ' + echo.value);
-
-    end = new Date().getTime() / 1000;
-    timeDiff = end - start;
-    distance = (timeDiff * speedSound) / 2;
-
-    console.log('Distance = ' + distance);
-
-    if (distance < 60) {
-      console.log('User is within 2ft.');
-      return true;
-    }
-  }
-
-  setTimeout(getDistance, 500);
 }
 
 module.exports = {
