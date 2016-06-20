@@ -29,12 +29,6 @@ function getDistance() {
   while (echo.value === 0) {
     start = new Date().getTime() / 1000;
     console.log('Echo is ' + echo.value);
-    trig.set(0);
-    setTimeout(function() {
-      trig.set();
-      setTimeout(10);
-      trig.set(0);
-    }, 500);
   }
 
   while (echo.value === 1) {

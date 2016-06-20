@@ -7,10 +7,8 @@ import IconButton from 'material-ui/lib/icon-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import Modal from 'react-modal';
 import VisitorModal from './VisitorModal';
-// import Motion from '../sensors/motion';
-import Proximity from '../sensors/proximity2';
+import Motion from '../sensors/motion';
 import * as Camera from '../sensors/camera';
-import fs from 'fs';
 import io from 'socket.io-client';
 let socket = io(`http://jarviscsg.herokuapp.com:80`);
 
