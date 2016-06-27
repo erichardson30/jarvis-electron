@@ -1,7 +1,7 @@
 
 import { exec } from 'child_process';
 import gpio from 'gpio';
-import proximity from './proximity2';
+// import proximity from './proximity2';
 
 const gpio4 = gpio.export(4, {
   direction: 'in',
@@ -20,6 +20,6 @@ gpio4.on('change', (val) => {
         }
       });
     console.log('checking proximity');
-    proximity.getDistance();
+    // proximity.getDistance();
   }
 });
