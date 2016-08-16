@@ -9,11 +9,14 @@ var gpio4 = gpio.export(4, {
    }
 });
 
-var proximity = require('./proximity');
+// var proximity = require('./proximity');
+
 var timestamp = moment().add(1, 'm');
 
 // bind to the "change" event
 gpio4.on("change", function(val) {
+
+    console.log("gpio on change");
 
     // value will report either 1 or 0 (number) when the value changes
     if (val == 1) {
@@ -29,8 +32,8 @@ gpio4.on("change", function(val) {
             }
         });
 
-        console.log("checking proximity");
-        proximity.getDistance();
+        // console.log("checking proximity");
+        // proximity.getDistance();
       }
 
     } else {
