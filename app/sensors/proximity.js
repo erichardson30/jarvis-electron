@@ -21,9 +21,8 @@ var getDistance = function() {
 
   // resetting trigger
   trig.set(0);
-  console.log("initial trig value (0): " + trig.value); // should be 0
-
   responsiveVoice.speak(" ");
+
   var monitor = true;
   var timestamp = moment().add(30, 's');
 
@@ -35,17 +34,22 @@ var getDistance = function() {
 
     // trigger on, then off then  monitor on change
     trig.set(function() {
-
-      console.log("1 trig value (1): " + trig.value) // should be 1
       setTimeout(function() {
-
         trig.set(0, function() {
-           console.log("2 trig value (0): " + trig.value) // should be 0
-
-           console.log("echo value: " + echo.value)
            echo.on("change", function(val) {
 
-             console.log("on change")
+             console.log("on change value: " + val);
+             if (val = 1) {
+               pulseEnd = moment().millisecond();
+               let duration = pulseEnd - pulseStart;
+               console.log("duration: " + duration);
+               let distance = duration * 17150;
+               let centimeters = Math.round10(duration, -1);
+               console.log("centimeters: " + centimeters);
+             } else {
+               console.log("nothing");
+               pulseStart = moment().millisecond();
+             }
 
            });
         });
@@ -56,8 +60,8 @@ var getDistance = function() {
 
     setTimeout(function () {
 
-      console.log("")
-      // echo.removeAllListeners('change');
+      console.log("remove all listeners")
+      echo.removeAllListeners('change');
       if (moment().isBefore(timestamp) && monitor) {
         monitorWithTimeout();
       };
