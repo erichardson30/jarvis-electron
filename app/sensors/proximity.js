@@ -34,24 +34,19 @@ var getDistance = function() {
 
     // trigger on, then off then  monitor on change
     trig.set(function() {
+
       setTimeout(function() {
         trig.set(0, function() {
+
+          console.log("trig value (0): " + trig.value) // should be 0
+
            echo.on("change", function(val) {
 
              console.log("on change value: " + val);
-             if (val = 1) {
-               pulseEnd = moment().millisecond();
-               let duration = pulseEnd - pulseStart;
-               console.log("duration: " + duration);
-               let distance = duration * 17150;
-               let centimeters = Math.round10(duration, -1);
-               console.log("centimeters: " + centimeters);
-             } else {
-               console.log("nothing");
-               pulseStart = moment().millisecond();
-             }
+
 
            });
+
         });
 
       }, 15);
