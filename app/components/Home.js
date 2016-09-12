@@ -31,7 +31,7 @@ export default class Home extends Component {
     let self = this;
     responsiveVoice.speak(" ");
 
-    axios.get('http://jarviscsg-api.herokuapp.com/api/schedules/now').then(function(response) {
+    axios.get('http://jarviscsg-api.herokuapp.com/api/schedules/now?officeLocation=' + process.env.OFFICE_LOCATION).then(function(response) {
       if (response.data.length > 0) {
         self.setState({
           visitors: response.data,
