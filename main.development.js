@@ -17,11 +17,13 @@ app.on('window-all-closed', () => {
 
 
 app.on('ready', () => {
+
+  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize]
   mainWindow = new BrowserWindow({
     show: false,
     frame: false,
-    width: 1024,
-    height: 728
+    width: width,
+    height: height
   });
 
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);
