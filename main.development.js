@@ -18,13 +18,8 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
 
-  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize]
-  mainWindow = new BrowserWindow({
-    show: false,
-    frame: false,
-    width: width,
-    height: height
-  });
+  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize];
+  mainWindow = new BrowserWindow({width,height});
 
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);
   mainWindow.openDevTools();
