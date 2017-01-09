@@ -22,7 +22,7 @@ RUN npm config set unsafe-perm true
 
 COPY ./package.json ./usr/src/app/
 
-RUN npm i --production --prefix ./usr/src/app/
+RUN npm i --development --prefix ./usr/src/app/
 
 COPY . ./usr/src/app/
 
