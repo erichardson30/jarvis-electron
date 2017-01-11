@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Menu, crashReporter, shell } from 'electron';
 
+
 let menu;
 let template;
 let mainWindow = null;
