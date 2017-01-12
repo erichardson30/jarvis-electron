@@ -22,11 +22,11 @@ RUN npm config set unsafe-perm true
 
 COPY ./package.json ./usr/src/app/
 
-RUN npm i --prefix ./usr/src/app/
+RUN npm i --development --prefix ./usr/src/app/
 
 COPY . ./usr/src/app/
 
-RUN npm run build --prefix ./usr/src/app/
+RUN npm run build --development --prefix ./usr/src/app/
 
 CMD ["/usr/src/app/launch_app.sh"]
 
