@@ -8,8 +8,8 @@ import Clear from 'material-ui/lib/svg-icons/content/clear';
 
 export default class VisitorModal extends Component {
   closeModal = () => {
-        this.props.close();
-    }
+      this.props.close();
+  }
     
   checkIn = (data) => {
     if(data.expecting) {
@@ -29,7 +29,6 @@ export default class VisitorModal extends Component {
   }
 
   render() {
-
     return (
       <Modal
         isOpen={this.props.open}

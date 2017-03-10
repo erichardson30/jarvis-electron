@@ -8,7 +8,7 @@ export default {
       exclude: /node_modules/
     },
     {
-      test: /\.(jpg|png)$/,
+      test: /\.(jpg|png|gif)$/,
       loader: 'file?name=[path][name].[hash].[ext]',
       include: path.images
     },

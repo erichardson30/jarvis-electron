@@ -7,6 +7,7 @@ import IconButton from 'material-ui/lib/icon-button';
 import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import Modal from 'react-modal';
 import VisitorModal from './VisitorModal';
+import NotifyModal from './NotifyModal';
 import Motion from '../sensors/motion';
 import * as Camera from '../sensors/camera';
 import io from 'socket.io-client';
@@ -19,12 +20,18 @@ export default class Home extends Component {
 
     this.state = {
       visitors: [],
-      modalIsOpen: false
+      modalIsOpen: false,
+      employeeName: null,
+      notifyModalOpen: false
     }
   }
 
   closeModal = () => {
         this.setState({ modalIsOpen: false});
+    }
+
+    closeNotifyModal = () => {
+      this.setState({ notifyModalOpen: false });
     }
 
   checkIn = () => {
@@ -45,7 +52,7 @@ export default class Home extends Component {
   notifyGroup = () => {
 
     console.log("notifying slack channel")
-
+    this.setState({ employeeName: 'someone', notifyModalOpen: true });
     responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
     this.closeModal();
     let data = {
@@ -60,7 +67,7 @@ export default class Home extends Component {
   }
 
   notifyEmployee = (data) => {
-
+    this.setState({ employeeName: data.firstName, notifyModalOpen: true });
     responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
     Camera.takePicture(data);
     this.closeModal();
@@ -87,6 +94,10 @@ export default class Home extends Component {
             visitors = {this.state.visitors}
             notifyEmployee = {this.notifyEmployee}
             notifyGroup = {this.notifyGroup} />
+          <NotifyModal
+            open={this.state.notifyModalOpen}
+            closeModal={this.closeNotifyModal}
+            employeeName = {this.state.employeeName} />
         </div>
       </div>
     );
