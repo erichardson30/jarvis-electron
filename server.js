@@ -8,7 +8,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.development';
 import { CronJob } from 'cron';
 import axios from 'axios';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 const app = express();
 const compiler = webpack(config);

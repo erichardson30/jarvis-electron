@@ -29,9 +29,8 @@ export default class Home extends Component {
 
   checkIn = () => {
     let self = this;
-    responsiveVoice.speak(" ");
 
-    axios.get('http://jarviscsg-api.herokuapp.com/api/schedules/now?officeLocation=' + process.env.OFFICE_LOCATION).then(function(response) {
+    axios.get('http://jarviscsg-api.herokuapp.com/api/schedules/now?officeLocation=RDU').then(function(response) {
       if (response.data.length > 0) {
         self.setState({
           visitors: response.data,
@@ -51,7 +50,7 @@ export default class Home extends Component {
     this.closeModal();
     let data = {
       firstName: 'Cardinal - RDU',
-      channel: 'C17MD45N2',
+      channel: 'C44F3SSDD',
       expecting: 'A visitor',
       date: new Date(),
       checkedIn : true,
