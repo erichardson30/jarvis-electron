@@ -11,19 +11,31 @@ import NotifyModal from './NotifyModal';
 import Motion from '../sensors/motion';
 import * as Camera from '../sensors/camera';
 import io from 'socket.io-client';
-let socket = io(`http://jarviscsg.herokuapp.com:80`);
 
 export default class Home extends Component {
 
   constructor(props) {
     super(props);
-
+    this.socket = io(`http://jarviscsg.herokuapp.com:80`);
     this.state = {
       visitors: [],
       modalIsOpen: false,
       employeeName: null,
       notifyModalOpen: false
     }
+  }
+
+  componentDidMount() {
+    this.socket.on('knock-knock', () => {
+        this.knock();
+      })
+      this.socket.on('speak', (event) => {
+        this.speak(event.message, event.voice);
+      })
+  }
+
+  speak(message, voice) {
+    responsiveVoice.speak(message, (voice ? voice : "UK English Male"), {rate: 0.8});
   }
 
   closeModal = () => {
