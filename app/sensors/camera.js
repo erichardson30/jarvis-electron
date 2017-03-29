@@ -29,6 +29,8 @@ camera.on("exit", function(timestamp) {
     fs.readFile('./image.jpg', function(err, buf) {
         if(data.checkIn) {
             socket.emit('newCheckIn', { image: true, buffer: buf.toString('base64'), data: data });
+        } else if(data.seeFront) {
+            socket.emit('seeFront', { image: true, buffer: buf.toString('base64'), data: data });
         } else {
             socket.emit('checkIn', { image: true, buffer: buf.toString('base64'), data: data });
         }

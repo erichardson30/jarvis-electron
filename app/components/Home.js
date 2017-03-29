@@ -26,15 +26,20 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.socket.on('knock-knock', () => {
-        this.knock();
+    this.socket.on('knock-knock', (event) => {
+        this.knock(event);
       })
       this.socket.on('speak', (event) => {
         this.speak(event.message, event.voice);
       })
   }
 
-  speak(message, voice) {
+  knock = (event) => {
+    event.seeFront = true;
+    Camera.takePicture(event);
+  }
+
+  speak = (message, voice) => {
     responsiveVoice.speak(message, (voice ? voice : "UK English Male"), {rate: 0.8});
   }
 
