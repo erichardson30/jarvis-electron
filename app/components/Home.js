@@ -21,11 +21,20 @@ export default class Home extends Component {
       visitors: [],
       modalIsOpen: false,
       employeeName: null,
-      notifyModalOpen: false
+      notifyModalOpen: false,
+      synth: null,
+      voices: [],
+      friday: 39,
+      jarvis: 16
     }
   }
 
   componentDidMount() {
+    debugger;
+    this.setState({synth: window.speechSynthesis}, () => {
+      this.setState({voices: this.state.synth.getVoices()});
+    });
+    
     this.socket.on('knock-knock', (event) => {
         this.knock(event);
       })
@@ -40,7 +49,21 @@ export default class Home extends Component {
   }
 
   speak = (message, voice) => {
-    responsiveVoice.speak(message, (voice ? voice : "UK English Male"), {rate: 0.8});
+    //responsiveVoice.speak(message, (voice ? voice : "UK English Male"), {rate: 0.8});
+    const talk = new SpeechSynthesisUtterance(message);
+    if (voice.toLowerCase() == 'jarvis') {
+      talk.voice = this.state.voices[this.state.jarvis];
+      talk.rate = 0.8;
+      talk.pitch = 0.8;
+    } else if (voice.toLowerCase() == 'friday') {
+       talk.voice = this.state.voices[this.state.friday];
+    } else {
+      talk.voice = this.state.voices[this.state.jarvis];
+      talk.rate = 0.8;
+      talk.pitch = 0.8;
+    }
+
+    this.state.synth.speak(talk);
   }
 
   closeModal = () => {
@@ -67,10 +90,14 @@ export default class Home extends Component {
   }
 
   notifyGroup = () => {
-
     console.log("notifying slack channel")
     this.setState({ employeeName: 'someone', notifyModalOpen: true });
-    responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
+    const talk = new SpeechSynthesisUtterance("Thank you I will let someone know you are here.");
+    talk.voice = this.state.voices[this.state.jarvis];
+    talk.rate = 0.8;
+    talk.pitch = 0.8;
+    this.state.synth.speak(talk);
+    // responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
     this.closeModal();
     let data = {
       firstName: 'Cardinal - RDU',
@@ -85,7 +112,12 @@ export default class Home extends Component {
 
   notifyEmployee = (data) => {
     this.setState({ employeeName: data.firstName, notifyModalOpen: true });
-    responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
+    const talk = new SpeechSynthesisUtterance("Thank you. I will let " + data.firstName + "know you are here.");
+    talk.voice = this.state.voices[this.state.jarvis];
+    talk.rate = 0.8;
+    talk.pitch = 0.8;
+    this.state.synth.speak(talk);
+    // responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
     Camera.takePicture(data);
     this.closeModal();
   }
