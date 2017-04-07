@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
-import NavigationClose from 'react-material-icons/icons/navigation/close';
 import Modal from 'react-modal';
 
 
@@ -13,7 +12,7 @@ export default class NotifyModal extends Component {
         onRequestClose={this.props.closeModal}
         closeTimeoutMS={5000}
         style={modalStyle} >
-        <button type="button" style={buttonStyle} onClick={this.props.closeModal}><NavigationClose style={iconStyle}/></button>
+        <button type="button" style={buttonStyle} onClick={this.props.closeModal}>X</button>
         <div>
           <div style={textStyle}>
           Thank you, I will let {this.props.employeeName} know you are here.  
@@ -57,11 +56,13 @@ const textStyle = {
   fontSize: '50px',
   marginTop: '50px'
 }
-const iconStyle = {
-  fill: 'white'
-}
+
 const buttonStyle = {
   background: 'transparent',
   border: 'none',
-  float: 'right'
+  float: 'right',
+  color: 'white',
+  fontWeight: '600',
+  fontSize: '20px',
+  marginRight: '20px'
 }

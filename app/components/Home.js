@@ -3,8 +3,6 @@ import styles from './Home.css';
 import axios from 'axios';
 import jarvis from 'file!../jarvis-bkrd.png';
 import RaisedButton from 'material-ui/lib/raised-button';
-import IconButton from 'material-ui/lib/icon-button';
-import ActionRecordVoiceOver from 'material-ui/lib/svg-icons/action/record-voice-over';
 import Modal from 'react-modal';
 import VisitorModal from './VisitorModal';
 import NotifyModal from './NotifyModal';
@@ -21,11 +19,7 @@ export default class Home extends Component {
       visitors: [],
       modalIsOpen: false,
       employeeName: null,
-      notifyModalOpen: false,
-      synth: null,
-      voices: [],
-      friday: 39,
-      jarvis: 16
+      notifyModalOpen: false
     }
   }
 
@@ -48,21 +42,11 @@ export default class Home extends Component {
   }
 
   speak = (message, voice) => {
-    //responsiveVoice.speak(message, (voice ? voice : "UK English Male"), {rate: 0.8});
-    const talk = new SpeechSynthesisUtterance(message);
-    if (voice.toLowerCase() == 'jarvis') {
-      talk.voice = this.state.voices[this.state.jarvis];
-      talk.rate = 0.8;
-      talk.pitch = 0.8;
-    } else if (voice.toLowerCase() == 'friday') {
-       talk.voice = this.state.voices[this.state.friday];
-    } else {
-      talk.voice = this.state.voices[this.state.jarvis];
-      talk.rate = 0.8;
-      talk.pitch = 0.8;
+    let jarvisVoice = 'UK English Male';
+    if(voice && voice.toLowerCase() == 'friday') {
+      jarvisVoice = 'UK English Female';
     }
-
-    this.state.synth.speak(talk);
+    responsiveVoice.speak(message, jarvisVoice, {rate: 0.8});
   }
 
   closeModal = () => {
@@ -106,24 +90,14 @@ export default class Home extends Component {
     Camera.takePicture(data);
     console.debug("NOTIFYING GROUP " + new Date());
     this.setState({ employeeName: 'someone', notifyModalOpen: true });
-    const talk = new SpeechSynthesisUtterance("Thank you I will let someone know you are here.");
-    talk.voice = this.state.voices[this.state.jarvis];
-    talk.rate = 0.8;
-    talk.pitch = 0.8;
-    this.state.synth.speak(talk);
-    // responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
+    responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
     this.closeModal();
   }
 
   notifyEmployee = (data) => {
     Camera.takePicture(data);
     this.setState({ employeeName: data.firstName, notifyModalOpen: true });
-    const talk = new SpeechSynthesisUtterance("Thank you. I will let " + data.firstName + "know you are here.");
-    talk.voice = this.state.voices[this.state.jarvis];
-    talk.rate = 0.8;
-    talk.pitch = 0.8;
-    this.state.synth.speak(talk);
-    // responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
+    responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
     this.closeModal();
   }
 
