@@ -95,6 +95,14 @@ export default class Home extends Component {
 
   notifyGroup = () => {
     console.debug("ABOUT TO TAKE PICTURE " + new Date());
+    let data = {
+      firstName: 'Cardinal - RDU',
+      channel: 'C44F3SSDD',
+      expecting: 'A visitor',
+      date: new Date(),
+      checkedIn : true,
+      checkedInDate : new Date()
+    };
     Camera.takePicture(data);
     console.debug("NOTIFYING GROUP " + new Date());
     this.setState({ employeeName: 'someone', notifyModalOpen: true });
@@ -105,18 +113,10 @@ export default class Home extends Component {
     this.state.synth.speak(talk);
     // responsiveVoice.speak("Thank you I will let someone know you are here.", "UK English Male", {rate: 0.8});
     this.closeModal();
-    let data = {
-      firstName: 'Cardinal - RDU',
-      channel: 'C44F3SSDD',
-      expecting: 'A visitor',
-      date: new Date(),
-      checkedIn : true,
-      checkedInDate : new Date()
-    };
-    
   }
 
   notifyEmployee = (data) => {
+    Camera.takePicture(data);
     this.setState({ employeeName: data.firstName, notifyModalOpen: true });
     const talk = new SpeechSynthesisUtterance("Thank you. I will let " + data.firstName + "know you are here.");
     talk.voice = this.state.voices[this.state.jarvis];
@@ -124,7 +124,6 @@ export default class Home extends Component {
     talk.pitch = 0.8;
     this.state.synth.speak(talk);
     // responsiveVoice.speak("Thank you. I will let " + data.firstName + "know you are here.", "UK English Male", {rate: 0.8});
-    Camera.takePicture(data);
     this.closeModal();
   }
 
