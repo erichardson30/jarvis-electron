@@ -30,7 +30,6 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    debugger;
     this.setState({synth: window.speechSynthesis}, () => {
       this.setState({voices: this.state.synth.getVoices()});
     });
@@ -74,7 +73,12 @@ export default class Home extends Component {
       this.setState({ notifyModalOpen: false });
     }
 
+    forceCloseNotifyModal = () => {
+      setTimeout(this.closeNotifyModal(), 5000);
+    }
+
   checkIn = () => {
+    console.debug("GUEST CHECKED IN " + new Date());
     let self = this;
 
     axios.get('http://jarviscsg-api.herokuapp.com/api/schedules/now?officeLocation=RDU').then(function(response) {
@@ -90,7 +94,9 @@ export default class Home extends Component {
   }
 
   notifyGroup = () => {
-    console.log("notifying slack channel")
+    console.debug("ABOUT TO TAKE PICTURE " + new Date());
+    Camera.takePicture(data);
+    console.debug("NOTIFYING GROUP " + new Date());
     this.setState({ employeeName: 'someone', notifyModalOpen: true });
     const talk = new SpeechSynthesisUtterance("Thank you I will let someone know you are here.");
     talk.voice = this.state.voices[this.state.jarvis];
@@ -107,7 +113,7 @@ export default class Home extends Component {
       checkedIn : true,
       checkedInDate : new Date()
     };
-    Camera.takePicture(data);
+    
   }
 
   notifyEmployee = (data) => {
@@ -135,7 +141,6 @@ export default class Home extends Component {
             labelColor="#FFF"
             labelStyle={style.label}
             onClick={this.checkIn}
-            icon={<ActionRecordVoiceOver style={style.icon}/>}
           />
           <VisitorModal
             open={this.state.modalIsOpen}
@@ -146,7 +151,9 @@ export default class Home extends Component {
           <NotifyModal
             open={this.state.notifyModalOpen}
             closeModal={this.closeNotifyModal}
-            employeeName = {this.state.employeeName} />
+            forceClose={this.forceCloseNotifyModal}
+            employeeName = {this.state.employeeName}
+            timeout = {5000} />
         </div>
       </div>
     );
@@ -155,17 +162,15 @@ export default class Home extends Component {
 
 const style = {
   button : {
+    display: 'block',
+    height: '200px',
+    width: '90%',
+    bottom: '2%',
     position: 'fixed',
-    bottom: '20px',
-    marginLeft: '-150px',
-    height: '80px',
-    width: '300px'
+    marginLeft: '5%',
+    borderRadius: '20px'
   },
   label : {
-    fontSize: '30px'
+    fontSize: '90px'
   },
-  icon : {
-    height : '40px',
-    width : '40px'
-  }
 }

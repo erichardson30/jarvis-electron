@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
+import NavigationClose from 'react-material-icons/icons/navigation/close';
 import Modal from 'react-modal';
-import ironman from '../img/jarvis_talking.gif';
 
 
 export default class NotifyModal extends Component {
@@ -13,8 +13,8 @@ export default class NotifyModal extends Component {
         onRequestClose={this.props.closeModal}
         closeTimeoutMS={5000}
         style={modalStyle} >
+        <button type="button" style={buttonStyle} onClick={this.props.closeModal}><NavigationClose style={iconStyle}/></button>
         <div>
-          <img src={ironman} style={imgStyle}/>
           <div style={textStyle}>
           Thank you, I will let {this.props.employeeName} know you are here.  
           </div>
@@ -55,5 +55,13 @@ const imgStyle = {
 }
 const textStyle = {
   fontSize: '50px',
-  marginTop: '30px'
+  marginTop: '50px'
+}
+const iconStyle = {
+  fill: 'white'
+}
+const buttonStyle = {
+  background: 'transparent',
+  border: 'none',
+  float: 'right'
 }
